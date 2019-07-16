@@ -1,0 +1,187 @@
+swagger: '2.0'
+info:
+  description: 'Portal OSK - API'
+  version: 1.0.0
+  title: Swagger Portal OSK
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: grzegorz.bis@horizonfinancial.pl
+  license:
+    name: Licencja
+    url: 'http://www.wezze.go'
+host: wezze.pl
+basePath: /
+tags:
+  - name: osk
+    description: Everything about your Pets
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+schemes:
+  - https
+  - http
+paths:
+  /users:
+    post:
+      tags:
+        - osk
+      summary: Dodaj Nowego Kursanta
+      description: 'Dodaje Nowego Kursanta'
+      operationId: addUser
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Description
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/UserResponse'
+definitions:
+  User:
+    type: object
+    required:
+      - name
+      - surname
+      - email
+      - mobileNumber
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 30
+        description: Some description
+      surname:
+        type: string
+        maxLength: 50
+        minLength: 1
+        description: Some description
+      role:
+        type: string
+        enum:
+          - ADMIN
+          - ROOT
+          - OWNER
+          - OPERATOR
+          - STUDENT
+          - INSTRUCTOR    
+      pesel:
+        type: number
+        format: int64
+        description: Numer Pesel. Wymagany tylko dla posiadających number pesel
+      placeOfBirth:
+        type: string
+        minLength: 1
+        maxLength: 30
+        description: User place of birth. Required only for role 'STUDENT'
+      email:
+        type: string
+        minLength: 50
+      mobileNumber:
+        type: number
+        format: int32
+        minimum: 100000000
+        maximum: 999999999
+      address: 
+        $ref: '#/definitions/Address'
+      permissions:
+        type: string
+        maxLength: 7
+        description: Nie wiem co to :)
+      userStatus:
+        type: string
+        enum:
+          - ACTIVE
+          - NEW
+          - DORMANT
+          - BLOCKED
+          - DELETED
+        description: User Status
+  Address:
+    type: object
+    required:
+      - town
+    properties:
+      town:
+        type: string
+        minLength: 1
+        maxLength: 70
+        description: Address town
+      street:
+        type: string
+        maxLength: 70
+        description: Address street
+      houseNumber: 
+        type: string
+        maxLength: 3
+        description: Address house number
+      flatNumber:
+        type: string
+        maxLength: 3
+        description: Address flat number
+      postalCode: 
+        type: string
+        maxLength: 6
+        description: Address postal code 
+      country:
+        type: string
+        maxLength: 2
+        minLength: 2
+        description: ISO Country Code
+        default: PL
+  UserResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      uri:
+        type: string
+      data:
+        $ref: '#/definitions/User'
+      page:
+        $ref: '#/definitions/PageObject'
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/LinkObject'
+  PageObject:
+    type: object
+    properties:
+      pageNumber:
+        type: number
+        format: int32
+        description: Current page number
+      pageSize:
+        type: number
+        format: int32
+        description: Current page size
+      totalItems:
+        type: number
+        format: int32
+        description: Count of total items
+      totalPages:
+        type: number
+        format: int32
+        description: Total number of page
+  LinkObject:
+    type: object
+    properties:
+      resourceId:
+        type: string
+        description: Linked Resource Id.
+      resourceType:
+        type: string
+        description: Describe resource link is related to
+      resourceUri: 
+        type: string
+        description: Complete uri of the resource related to currently returned resource.
+      href:
+        type: string
+        description: Full link for external resource links 
