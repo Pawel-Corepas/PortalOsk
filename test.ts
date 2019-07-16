@@ -1,1 +1,3 @@
-Test.ts
+export class testClass{
+    
+}
