@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
     BrowserModule,
     AppRoutingModule,
     AlertModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

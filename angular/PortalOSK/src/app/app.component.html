@@ -1,21 +1,37 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Elcar Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Kursanci
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Jazdy
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+            Instruktorzy
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Action</a>
@@ -24,13 +40,32 @@
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Płatności
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Zasoby
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+        <div class="text-light mr-4">Grzegorz Biś</div>
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Wyloguj</button>
       </form>
     </div>
   </nav>
@@ -40,21 +75,119 @@
          <div class="card-header text-white bg-dark">
            <div class="row">
              <h4 class="pl-4">Kursanci</h4>
-              <form class="form-inline my-2 my-lg-0">
+             <div class="ml-auto">
+              <form class="form-inline my-2 my-lg-0" >
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
+            </div>
            </div>
            
          </div>
          <div class="card-body">
-           <h4 class="card-title">Title</h4>
-           <p class="card-text">Text</p>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imie i Nazwisko</th>
+                <th scope="col">Kategoria</th>
+               
+                <th scope="col">Telefon</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Liczba Godzin</th>
+                <th scope="col">Ostatnia Jazda</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                <td>C+E</td>
+                <td>698564758</td>
+                <td class="text-warning">-1900,00 PLN</td>
+                <td>12</td>
+                <td>2019-12-07</td>
+                <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              <tr>
+                  <th scope="row">2</th>
+                  <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                  <td>C+E</td>
+                  <td>698564758</td>
+                  <td class="text-warning">-1900,00 PLN</td>
+                  <td>12</td>
+                  <td>2019-12-07</td>
+                  <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                    <td>C+E</td>
+                    <td>698564758</td>
+                    <td class="text-warning">-1900,00 PLN</td>
+                    <td>12</td>
+                    <td>2019-12-07</td>
+                    <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                    </td>
+                  </tr>
+                  <tr>
+                      <th scope="row">4</th>
+                      <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                      <td>C+E</td>
+                      <td>698564758</td>
+                      <td class="text-warning">-1900,00 PLN</td>
+                      <td>12</td>
+                      <td>2019-12-07</td>
+                      <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                      </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                        <td>C+E</td>
+                        <td>698564758</td>
+                        <td class="text-success">0,00 PLN</td>
+                        <td>12</td>
+                        <td>2019-12-07</td>
+                        <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                        </td>
+                      </tr>
+
+                      <tr>
+                          <th scope="row">6</th>
+                          <td>Grzegorz Biś <img src="http://clipart-library.com/images/5iRXRgzRT.png" class="rounded-circle img-thumbnail" style="width: 40px;"></td>
+                          <td>C+E</td>
+                          <td>698564758</td>
+                          <td class="text-warning">-1900,00 PLN</td>
+                          <td>12</td>
+                          <td>2019-12-07</td>
+                          <td><a name="" id="" class="btn btn-outline-primary" href="#" role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                          </td>
+                        </tr>
+            </tbody>
+          </table>
          </div>
          <div class="card-footer text-muted">
-           Footer
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
          </div>
        </div>
       </div>
    </body>
+   
   <router-outlet></router-outlet>
