@@ -1,16 +1,171 @@
-<div   class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
-  <app-customers-sidebar-menu></app-customers-sidebar-menu>
-   <main class="page-content">
-    <div (window:resize)="onResized($event)" class="container-fluid">
-        <div class="row">
-            <div class="form-group col-md-12">
-                <button *ngIf="getSideBarState()" (click)="toggleSidebar()" type="button" class="btn btn-outline-primary"> <i class="fa fa-bars" aria-hidden="true"></i> </button>
-                <!-- <a href="#" class="btn btn-outline-secondary mr-1 mb-1" (click)="toggleSidebar()">Toggle Sidebar</a> -->
-            </div>
-        </div>
+<nav class="navbar navbar-dark bg-dark pd-5">
+  <div class="row d-flex justify-content-between w-100">
+    <div class="col-4">
+
+      <button *ngIf="getSideBarState()" (click)="toggleSidebar()" type="button" class="btn btn-outline-primary">
+        <i class="fa fa-bars" aria-hidden="true"></i> </button>
+      <!-- <a href="#" class="btn btn-outline-secondary mr-1 mb-1" (click)="toggleSidebar()">Toggle Sidebar</a> -->
 
     </div>
-    <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSideBarState()}"></div>
-    <router-outlet></router-outlet>
-</main>
+    <div class="desktop-table-container">
+      <div class="col-4">
+
+        <img class="img-responsive img-rounded" src="assets/img/logo-white-transparent.png" style="width:200px"
+          alt="User picture">
+      </div>
+    </div>
+    <div class="text-right ">
+      <div class="row topbar ">
+        <div class="dropdown p-2" dropdown>
+
+          <a href="#" dropdownToggle>
+            <i class="fa fa-bell font-size-2"></i>
+            <span class="badge badge-pill badge-warning notification">5</span>
+          </a>
+          <div class="dropdown-menu notifications" *dropdownMenu>
+            <div class="notifications-header">
+              <i class="fa fa-bell font-size-2"></i>
+              Notifications
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <div class="notification-content">
+                <div class="icon">
+                  <i class="fas fa-check text-success border border-success"></i>
+                </div>
+                <div class="content">
+                  <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                  <div class="notification-time">
+                    6 minutes ago
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="dropdown-item" href="#">
+              <div class="notification-content">
+                <div class="icon">
+                  <i class="fas fa-exclamation text-info border border-info"></i>
+                </div>
+                <div class="content">
+                  <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                  <div class="notification-time">
+                    Today
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="dropdown-item" href="#">
+              <div class="notification-content">
+                <div class="icon">
+                  <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
+                </div>
+                <div class="content">
+                  <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                  <div class="notification-time">
+                    Yesterday
+                  </div>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-center" href="#">View all notifications</a>
+          </div>
+        </div>
+        <div class="dropdown p-2" dropdown>
+          <a href="#" dropdownToggle>
+            <i class="fa fa-envelope font-size-2"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+          </a>
+          <div class="dropdown-menu messages" *dropdownMenu>
+            <div class="messages-header">
+              <i class="fa fa-envelope"></i>
+              Messages
+            </div>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+              <div class="message-content">
+                <div class="pic">
+                  <img src="assets/img/user.jpg" alt="">
+                </div>
+                <div class="content">
+                  <div class="message-title">
+                    <strong> Jhon doe</strong>
+                  </div>
+                  <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                </div>
+              </div>
+
+            </a>
+            <a class="dropdown-item" href="#">
+              <div class="message-content">
+                <div class="pic">
+                  <img src="assets/img/user.jpg" alt="">
+                </div>
+                <div class="content">
+                  <div class="message-title">
+                    <strong> Jhon doe</strong>
+                  </div>
+                  <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                </div>
+              </div>
+
+            </a>
+            <a class="dropdown-item" href="#">
+              <div class="message-content">
+                <div class="pic">
+                  <img src="assets/img/user.jpg" alt="">
+                </div>
+                <div class="content">
+                  <div class="message-title">
+                    <strong> Jhon doe</strong>
+                  </div>
+                  <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. In totam explicabo</div>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-center" href="#">View all messages</a>
+
+          </div>
+        </div>
+        <div class="dropdown p-2" dropdown>
+          <a href="#" dropdownToggle>
+            <i class="fa fa-cog font-size-2"></i>
+            <span class="badge-sonar"></span>
+          </a>
+          <div class="dropdown-menu" *dropdownMenu>
+            <a class="dropdown-item" href="#">My profile</a>
+            <a class="dropdown-item" href="#">Help</a>
+            <a class="dropdown-item" href="#">Setting</a>
+          </div>
+        </div>
+        <div class="p-2">
+          <a href="#">
+            <i class="fa fa-power-off font-size-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</nav>
+<div class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
+  <app-customers-sidebar-menu></app-customers-sidebar-menu>
+  <main class="page-content">
+    <div (window:resize)="onResized($event)" class="container-fluid">
+
   
+    </div>
+    <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSideBarState()}"></div>
+
+    <router-outlet></router-outlet>
+  
+  </main>
+ 

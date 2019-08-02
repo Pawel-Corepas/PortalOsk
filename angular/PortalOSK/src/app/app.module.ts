@@ -11,15 +11,33 @@ import { CustomersListComponent } from './customers/customers-list/customers-lis
 import { CustomersSidebarMenuComponent } from './customers/customers-sidebar-menu/customers-sidebar-menu.component';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { AngularResizedEventModule } from 'angular-resize-event';
+import { CustomersService } from './customers/customers-list/customers.service';
+import { StatsBarComponent } from './common/stats-bar/stats-bar.component';
+import { StatsBarItemComponent } from './common/stats-bar/stats-bar-item/stats-bar-item.component';
+import { Routes, RouterModule } from '@angular/router';
+import { CustomerDashboardComponent } from './customers/customer-dashboard/customer-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './common/charts/bar-chart/bar-chart.component';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
+const appRoutes:Routes = [
+
+  { path: 'customers', component: CustomersListComponent  },
+  { path: 'customer/dashboard', component: CustomerDashboardComponent  }
+
+];
 @NgModule({
   declarations: [
     AppComponent,
     CustomersListComponent,
-    CustomersSidebarMenuComponent
+    CustomersSidebarMenuComponent,
+    StatsBarComponent,
+    StatsBarItemComponent,
+    CustomerDashboardComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -29,13 +47,16 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PerfectScrollbarModule,
     BrowserAnimationsModule,
     DeviceDetectorModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    RouterModule.forRoot(appRoutes),
+    ChartsModule
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+    },
+    CustomersService
   ],
   
   bootstrap: [AppComponent]

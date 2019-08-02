@@ -16,23 +16,27 @@ export class CustomerSidebarService {
       icon: 'fa fa-tachometer-alt',
       active: false,
       type: 'dropdown',
+      routerLink:"/",
       badge: {
         text: 'New ',
         class: 'badge-warning'
       },
       submenus: [
         {
-          title: 'Raporty',
+          title: 'Kursant Dashboard',
           badge: {
             text: 'Pro ',
             class: 'badge-success'
-          }
+          },
+          routerLink:"/customer/dashboard",
         },
         {
-          title: 'Rozliczenia'
+          title: 'Rozliczenia',
+           routerLink:"/",
         },
         {
-          title: 'Faktury'
+          title: 'Faktury',
+          routerLink:"/"
         }
       ]
     },
@@ -41,6 +45,7 @@ export class CustomerSidebarService {
       icon: 'fa fa-shopping-cart',
       active: false,
       type: 'dropdown',
+      routerLink:"/",
       badge: {
         text: '3',
         class: 'badge-danger'
@@ -48,12 +53,15 @@ export class CustomerSidebarService {
       submenus: [
         {
           title: 'Samochody',
+          routerLink:"/"
         },
         {
-          title: 'Wyposażenie'
+          title: 'Wyposażenie',
+          routerLink:"/"
         },
         {
-          title: 'Biuro'
+          title: 'Biuro',
+          routerLink:"/"
         }
       ]
     },
@@ -62,15 +70,19 @@ export class CustomerSidebarService {
       icon: 'far fa-gem',
       active: false,
       type: 'dropdown',
+      routerLink:"/",
       submenus: [
         {
           title: 'Lista',
+          routerLink:"/"
         },
         {
-          title: 'Dodaj'
+          title: 'Dodaj',
+          routerLink:"/"
         },
         {
-          title: 'Kalendzarz'
+          title: 'Kalendzarz',
+          routerLink:"/"
         }
       ]
     },
@@ -79,18 +91,23 @@ export class CustomerSidebarService {
       icon: 'fa fa-chart-line',
       active: false,
       type: 'dropdown',
+      routerLink:"/",
       submenus: [
         {
           title: 'Kat A',
+          routerLink:"/"
         },
         {
-          title: 'Kat B'
+          title: 'Kat B',
+          routerLink:"/",
         },
         {
-          title: 'Kat C, C+E'
+          title: 'Kat C, C+E',
+          routerLink:"/"
         },
         {
-          title: 'Kat D'
+          title: 'Kat D',
+          routerLink:"/"
         }
       ]
     },
@@ -99,12 +116,15 @@ export class CustomerSidebarService {
       icon: 'fa fa-globe',
       active: false,
       type: 'dropdown',
+      routerLink:"/",
       submenus: [
         {
           title: 'Radomsko',
+          routerLink:"/"
         },
         {
-          title: 'Włoszczowa'
+          title: 'Włoszczowa',
+          routerLink:"/"
         }
       ]
     },
@@ -113,10 +133,11 @@ export class CustomerSidebarService {
       type: 'header'
     },
     {
-      title: 'Lista Kursantów',
+      title: 'Kursanci',
       icon: 'fa fa-book',
       active: false,
       type: 'simple',
+      routerLink:"/customers",
       badge: {
         text: '15',
         class: 'badge-primary'
@@ -126,13 +147,15 @@ export class CustomerSidebarService {
       title: 'Kalendarz Jazd',
       icon: 'fa fa-calendar',
       active: false,
-      type: 'simple'
+      type: 'simple',
+      routerLink:"/"
     },
     {
       title: 'Dokumenty',
       icon: 'fa fa-folder',
       active: false,
-      type: 'simple'
+      type: 'simple',
+      routerLink:"/"
     }
   ];
   constructor() { }

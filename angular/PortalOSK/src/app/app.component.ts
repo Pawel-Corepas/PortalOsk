@@ -12,13 +12,11 @@ export class AppComponent  {
 
   constructor(public sidebarservice: CustomerSidebarService) { }
   onResized(event) {
-    if(event.target.window.innerWidth< 768){
+    if(event.target.window.innerWidth< 1768){
       this.hideSidebar()
       } else{
         this.sidebarservice.setSidebarState(false);
       }
-    
-    
   }
   toggleSidebar() {
     this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());
