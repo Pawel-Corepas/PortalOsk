@@ -9,6 +9,8 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 
 
+
+
 body {
   font-size: .9rem;
 }
@@ -78,6 +80,10 @@ body {
 
 }
 
+.w-3rem{
+  width: 8rem;
+}
+
 .mobile-table-container{
   display: inherit;
   @media screen and (min-width: 1100px){
@@ -103,4 +109,8 @@ body {
   width: 10rem;
 
  
+}
+
+.bg-gradient-secondary{
+  background-image: linear-gradient(rgba(54, 2, 27, 0.76), rgb(12, 2, 1));
 }

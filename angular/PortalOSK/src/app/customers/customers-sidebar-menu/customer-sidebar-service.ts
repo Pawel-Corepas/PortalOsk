@@ -16,7 +16,7 @@ export class CustomerSidebarService {
       icon: 'fa fa-tachometer-alt',
       active: false,
       type: 'dropdown',
-      routerLink:"/",
+      routerLink: '/',
       badge: {
         text: 'New ',
         class: 'badge-warning'
@@ -28,15 +28,15 @@ export class CustomerSidebarService {
             text: 'Pro ',
             class: 'badge-success'
           },
-          routerLink:"/customer/dashboard",
+          routerLink: '/customer/dashboard',
         },
         {
           title: 'Rozliczenia',
-           routerLink:"/",
+           routerLink: '/',
         },
         {
           title: 'Faktury',
-          routerLink:"/"
+          routerLink: '/'
         }
       ]
     },
@@ -45,7 +45,7 @@ export class CustomerSidebarService {
       icon: 'fa fa-shopping-cart',
       active: false,
       type: 'dropdown',
-      routerLink:"/",
+      routerLink: '/',
       badge: {
         text: '3',
         class: 'badge-danger'
@@ -53,15 +53,15 @@ export class CustomerSidebarService {
       submenus: [
         {
           title: 'Samochody',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Wyposażenie',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Biuro',
-          routerLink:"/"
+          routerLink: '/'
         }
       ]
     },
@@ -70,19 +70,19 @@ export class CustomerSidebarService {
       icon: 'far fa-gem',
       active: false,
       type: 'dropdown',
-      routerLink:"/",
+      routerLink: '/',
       submenus: [
         {
           title: 'Lista',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Dodaj',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Kalendzarz',
-          routerLink:"/"
+          routerLink: '/'
         }
       ]
     },
@@ -91,23 +91,23 @@ export class CustomerSidebarService {
       icon: 'fa fa-chart-line',
       active: false,
       type: 'dropdown',
-      routerLink:"/",
+      routerLink: '/',
       submenus: [
         {
           title: 'Kat A',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Kat B',
-          routerLink:"/",
+          routerLink: '/',
         },
         {
           title: 'Kat C, C+E',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Kat D',
-          routerLink:"/"
+          routerLink: '/'
         }
       ]
     },
@@ -116,15 +116,15 @@ export class CustomerSidebarService {
       icon: 'fa fa-globe',
       active: false,
       type: 'dropdown',
-      routerLink:"/",
+      routerLink: '/',
       submenus: [
         {
           title: 'Radomsko',
-          routerLink:"/"
+          routerLink: '/'
         },
         {
           title: 'Włoszczowa',
-          routerLink:"/"
+          routerLink: '/'
         }
       ]
     },
@@ -137,7 +137,7 @@ export class CustomerSidebarService {
       icon: 'fa fa-book',
       active: false,
       type: 'simple',
-      routerLink:"/customers",
+      routerLink: '/customers',
       badge: {
         text: '15',
         class: 'badge-primary'
@@ -148,14 +148,14 @@ export class CustomerSidebarService {
       icon: 'fa fa-calendar',
       active: false,
       type: 'simple',
-      routerLink:"/"
+      routerLink: '/org/calendar'
     },
     {
       title: 'Dokumenty',
       icon: 'fa fa-folder',
       active: false,
       type: 'simple',
-      routerLink:"/"
+      routerLink: '/'
     }
   ];
   constructor() { }

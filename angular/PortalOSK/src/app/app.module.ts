@@ -1,43 +1,46 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularResizedEventModule } from 'angular-resize-event';
+import { ChartsModule } from 'ng2-charts';
+import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { CustomersListComponent } from './customers/customers-list/customers-list.component';
-import { CustomersSidebarMenuComponent } from './customers/customers-sidebar-menu/customers-sidebar-menu.component';
-import { DeviceDetectorModule } from 'ngx-device-detector';
-import { AngularResizedEventModule } from 'angular-resize-event';
-import { CustomersService } from './customers/customers-list/customers.service';
-import { StatsBarComponent } from './common/stats-bar/stats-bar.component';
-import { StatsBarItemComponent } from './common/stats-bar/stats-bar-item/stats-bar-item.component';
-import { Routes, RouterModule } from '@angular/router';
-import { CustomerDashboardComponent } from './customers/customer-dashboard/customer-dashboard.component';
-import { ChartsModule } from 'ng2-charts';
+import { OrgCalendarComponent } from './calendar/org-calendar/org-calendar.component';
 import { BarChartComponent } from './common/charts/bar-chart/bar-chart.component';
+import { StatsBarItemComponent } from './common/stats-bar/stats-bar-item/stats-bar-item.component';
+import { StatsBarComponent } from './common/stats-bar/stats-bar.component';
+import { CustomerDashboardComponent } from './customers/customer-dashboard/customer-dashboard.component';
+import { CustomersListComponent } from './customers/customers-list/customers-list.component';
+import { CustomersService } from './customers/customers-list/customers.service';
+import { CustomersSidebarMenuComponent } from './customers/customers-sidebar-menu/customers-sidebar-menu.component';
+import { ProductCardComponent } from './products/product-card/product-card.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 
-const appRoutes:Routes = [
+const appRoutes: Routes = [
 
   { path: 'customers', component: CustomersListComponent  },
-  { path: 'customer/dashboard', component: CustomerDashboardComponent  }
+  { path: 'customer/dashboard', component: CustomerDashboardComponent  },
+  { path: 'org/calendar', component: OrgCalendarComponent  }
 
 ];
 @NgModule({
-  declarations: [
+  declarations:  [
     AppComponent,
     CustomersListComponent,
     CustomersSidebarMenuComponent,
     StatsBarComponent,
     StatsBarItemComponent,
     CustomerDashboardComponent,
-    BarChartComponent
+    BarChartComponent,
+    OrgCalendarComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,6 @@ const appRoutes:Routes = [
     },
     CustomersService
   ],
-  
-  bootstrap: [AppComponent]
+bootstrap: [AppComponent]
 })
 export class AppModule { }
