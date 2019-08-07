@@ -1,6 +1,6 @@
 <div class="card-block">
 
-    <div class="card-body  ">
+    <div class="card-body  mx-auto mw-900 font-size-2">
         <div class="row my-3">
             <h4 class="col card-title">Kurs Lipcowy 10.07.2019</h4>
             <h5 class="col-3 card-title"> <span class="badge badge-danger">Kategoria B</span>
@@ -11,7 +11,10 @@
 
         <hr class="bg-white mx-1">
         <div class="row">
-
+            <div class="col-2 text-right">
+                <img src="./assets/img/user.jpg"
+                    class="img-fluid rounded-top,rounded-right,rounded-bottom,rounded-left, w-3rem" alt="avatar">
+            </div>
             <div class="col my-auto">
                 <div class="media">
                     <div class="media-body">
@@ -22,9 +25,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <img src="./assets/img/user.jpg"
-                    class="img-fluid rounded-top,rounded-right,rounded-bottom,rounded-left, w-3rem" alt="avatar">
+            <div class="col my-auto">
+                <i class="fa fa-car font-size-3 mx-2" aria-hidden="true"></i>
+                <i class="fa fa-motorcycle font-size-3 mx-2" aria-hidden="true"></i>
+                <i class="fa fa-truck font-size-3 mx-2" aria-hidden="true"></i>
+                <i class="fa fa-bus font-size-3 mx-2" aria-hidden="true"></i>
             </div>
         </div>
         <hr class="bg-white mx-1">
@@ -39,6 +44,7 @@
                                  <i class="far fa-calendar-alt m-1"></i>12 Sierpnia 2018 <br>
                                  <i class="far fa-clock m-1"></i> Godzina 14:00
                                 </div>
+                                <button type="button" class="btn btn-outline-danger">Odwołaj</button>
                             </div>
                         </div>
                         <div class="col my-auto bl-1">
@@ -101,14 +107,15 @@
                                     <h5 class="mx-1 text-warning" >1000.00 PLN</h5>
                                     <small class="text-white pl-1">Pozostało do zapłaty</small>
                                 </div>
+                                <button type="button" class="btn btn-danger">Zapłać</button>
                             </div>
+                            
                         </div>
                 </div>
             <hr class="bg-white mx-1">
 
 
-            <button type="button" class="btn btn-danger m-1 w-100">Umów Jazdę</button>
-            <button type="button" class="btn btn-outline-danger m-1 w-100">Zapłać za kurs</button>
+            <button type="button" (click)="openModalCalendar()" class="btn btn-danger m-1 w-100 font-size-2 text-uppercase">Umów Jazdę</button>
 
         <p class="card-text"><small class="text-muted">Ostatnia Wpłata: 29-06-2019</small></p>
     </div>

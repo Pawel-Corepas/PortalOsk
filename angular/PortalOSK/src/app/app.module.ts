@@ -18,6 +18,7 @@ import { CustomersListComponent } from './customers/customers-list/customers-lis
 import { CustomersService } from './customers/customers-list/customers.service';
 import { CustomersSidebarMenuComponent } from './customers/customers-sidebar-menu/customers-sidebar-menu.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -25,13 +26,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 const appRoutes: Routes = [
 
-  { path: 'customers', component: CustomersListComponent  },
-  { path: 'customer/dashboard', component: CustomerDashboardComponent  },
-  { path: 'org/calendar', component: OrgCalendarComponent  }
+  { path: 'customers', component: CustomersListComponent },
+  { path: 'customer/dashboard', component: CustomerDashboardComponent },
+  { path: 'org/calendar', component: OrgCalendarComponent }
 
 ];
 @NgModule({
-  declarations:  [
+  declarations: [
     AppComponent,
     CustomersListComponent,
     CustomersSidebarMenuComponent,
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     DeviceDetectorModule,
     AngularResizedEventModule,
     RouterModule.forRoot(appRoutes),
-    ChartsModule
+    ChartsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     {
@@ -61,6 +63,7 @@ const appRoutes: Routes = [
     },
     CustomersService
   ],
-bootstrap: [AppComponent]
+  entryComponents: [OrgCalendarComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

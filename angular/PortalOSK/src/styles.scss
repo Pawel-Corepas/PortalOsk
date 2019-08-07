@@ -114,3 +114,33 @@ body {
 .bg-gradient-secondary{
   background-image: linear-gradient(rgba(54, 2, 27, 0.76), rgb(12, 2, 1));
 }
+
+.mw-900{
+  max-width: 900px;
+}
+
+
+.modal-dialog {
+  max-width: 1224px;
+  margin: 1.75rem auto;
+  min-height: 1000px;
+  
+}
+.cal-grid-cell-month{
+  color:white;
+  min-height: 20rem;
+  border: 1px solid white;
+  height: 7rem;
+  width: 8rem;
+  font-size: 1.2rem;
+
+  &:hover{
+    background-color: $dark;
+    cursor: pointer;
+  }
+}
+
+.cal-grid-heading{
+ min-height: 5rem;
+ text-align: center;  
+}
