@@ -28,7 +28,8 @@ const appRoutes: Routes = [
 
   { path: 'customers', component: CustomersListComponent },
   { path: 'customer/dashboard', component: CustomerDashboardComponent },
-  { path: 'org/calendar', component: OrgCalendarComponent }
+  { path: 'org/calendar', component: OrgCalendarComponent },
+  { path: 'customer/booking', component: OrgCalendarComponent }
 
 ];
 @NgModule({

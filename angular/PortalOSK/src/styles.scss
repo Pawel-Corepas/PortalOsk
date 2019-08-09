@@ -124,13 +124,13 @@ body {
   max-width: 1224px;
   margin: 1.75rem auto;
   min-height: 1000px;
-  
+  box-sizing: border-box;
 }
 .cal-grid-cell-month{
   color:white;
   min-height: 20rem;
   border: 1px solid white;
-  height: 7rem;
+  height: 5rem;
   width: 8rem;
   font-size: 1.2rem;
 
