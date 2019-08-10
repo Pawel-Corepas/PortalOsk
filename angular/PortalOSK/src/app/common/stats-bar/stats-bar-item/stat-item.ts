@@ -1,5 +1,5 @@
-export class StatItem{
-    name:string;
-    value:string;
-    class:string;
+export class StatItem {
+    name: string;
+    value: string;
+    class: string;
 }

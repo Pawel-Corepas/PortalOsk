@@ -4,7 +4,7 @@
         <div class="row my-3">
             <h4 class="col card-title">Kurs Lipcowy 10.07.2019</h4>
             <h5 class="col-3 card-title"> <span class="badge badge-danger">Kategoria B</span>
-            
+
             </h5>
 
         </div>
@@ -33,89 +33,98 @@
             </div>
         </div>
         <hr class="bg-white mx-1">
-                <div class="row">
+        <div class="row">
 
-                        <div class="col my-auto border-right border-white">
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mx-1">Następna Jazda</h5>
-                                 <br>
-                                 <i class="fas fa-map-marker-alt m-1"></i> Plac Manewrowy, Radomsko <br>
-                                 <i class="far fa-calendar-alt m-1"></i>12 Sierpnia 2018 <br>
-                                 <i class="far fa-clock m-1"></i> Godzina 14:00
-                                </div>
-                                <button type="button" class="btn btn-outline-danger">Odwołaj</button>
-                            </div>
-                        </div>
-                        <div class="col my-auto bl-1">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h5 class="mx-1">Ostatnia Jazda</h5>
-                                     <br>
-                                     <i class="fas fa-map-marker-alt m-1"></i> Biuro Kościuszki, Radomsko <br>
-                                     <i class="far fa-calendar-alt m-1"></i>3 Sierpnia 2018 <br>
-                                     <i class="far fa-clock m-1"></i> Godzina 14:00
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col my-auto border-right border-white">
+                <div class="media" *ngIf="currentEvent">
+                    <div class="media-body">
+                        <h5 class="mx-1">Następna Jazda</h5>
+                        <br>
+                        <i class="fas fa-map-marker-alt m-1"></i> Plac Manewrowy, Radomsko <br>
+                        <i class="far fa-calendar-alt m-1"></i>{{getNextBookingDate() }}<br>
+                        <i class="far fa-clock m-1"></i> {{'Godzina ' +getNextBookingTime()}}
                     </div>
-            
-                  <hr class="bg-white mx-1">
-            <div class="row">
-
-                    <div class="col my-auto border-right border-white">
-                        <div class="media">
-                            <div class="media-body text-center">
-                                <h5 class="mx-1">30 Godzin</h5>
-                                <small class="text-white pl-1">Wykłady</small>
-                                <div class="progress m-2">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="50"
-                                            aria-valuemin="0" aria-valuemax="100">100%</div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                            <div class="media">
-                                <div class="media-body text-center">
-                                    <h5 class="mx-1 text-warning" >30 Godzin</h5>
-                                    <small class="text-white pl-1">Jazdy</small>
-                                    <div class="progress m-2">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50"
-                                                aria-valuemin="0" aria-valuemax="100">50%</div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <button type="button" class="btn btn-outline-danger">Odwołaj</button>
                 </div>
-                <hr class="bg-white mx-1">
-            <div class="row">
+                <div class="col justify-content-center" *ngIf="!currentEvent">
+                    
+                        <div class="row"><h5 class="m-2">Nie masz umówionej żadnej jazdy!</h5></div>
+                        <div class="row"><button type="button" (click)="openModalCalendar()" class="btn btn-danger">Umów Jazdę</button></div>
+                        
+                    
 
-                    <div class="col my-auto border-right border-white">
-                        <div class="media">
-                            <div class="media-body text-center">
-                                <h5 class="mx-1">1800.00 PLN</h5>
-                                <small class="text-white pl-1">Cena Kursu</small>
-                            </div>
+                </div>
+            </div>
+            <div class="col my-auto bl-1">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mx-1">Ostatnia Jazda</h5>
+                        <br>
+                        <i class="fas fa-map-marker-alt m-1"></i> Biuro Kościuszki, Radomsko <br>
+                        <i class="far fa-calendar-alt m-1"></i>3 Sierpnia 2018 <br>
+                        <i class="far fa-clock m-1"></i> Godzina 14:00
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="bg-white mx-1">
+        <div class="row">
+
+            <div class="col my-auto border-right border-white">
+                <div class="media">
+                    <div class="media-body text-center">
+                        <h5 class="mx-1">30 Godzin</h5>
+                        <small class="text-white pl-1">Wykłady</small>
+                        <div class="progress m-2">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">100%</div>
                         </div>
                     </div>
-
-                    <div class="col my-auto">
-                            <div class="media">
-                                <div class="media-body text-center">
-                                    <h5 class="mx-1 text-warning" >1000.00 PLN</h5>
-                                    <small class="text-white pl-1">Pozostało do zapłaty</small>
-                                </div>
-                                <button type="button" class="btn btn-danger">Zapłać</button>
-                            </div>
-                            
-                        </div>
                 </div>
-            <hr class="bg-white mx-1">
+            </div>
+
+            <div class="col">
+                <div class="media">
+                    <div class="media-body text-center">
+                        <h5 class="mx-1 text-warning">30 Godzin</h5>
+                        <small class="text-white pl-1">Jazdy</small>
+                        <div class="progress m-2">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="bg-white mx-1">
+        <div class="row">
+
+            <div class="col my-auto border-right border-white">
+                <div class="media">
+                    <div class="media-body text-center">
+                        <h5 class="mx-1">1800.00 PLN</h5>
+                        <small class="text-white pl-1">Cena Kursu</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col my-auto">
+                <div class="media">
+                    <div class="media-body text-center">
+                        <h5 class="mx-1 text-warning">1000.00 PLN</h5>
+                        <small class="text-white pl-1">Pozostało do zapłaty</small>
+                    </div>
+                    <button type="button" class="btn btn-danger">Zapłać</button>
+                </div>
+
+            </div>
+        </div>
+        <hr class="bg-white mx-1">
 
 
-            <button type="button" (click)="openModalCalendar()" class="btn btn-danger m-1 w-100 font-size-2 text-uppercase">Umów Jazdę</button>
+        <button type="button" (click)="openModalCalendar()"
+            class="btn btn-danger m-1 w-100 font-size-2 text-uppercase">Umów Jazdę</button>
 
         <p class="card-text"><small class="text-muted">Ostatnia Wpłata: 29-06-2019</small></p>
     </div>

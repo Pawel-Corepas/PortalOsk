@@ -19,6 +19,9 @@ import { CustomersService } from './customers/customers-list/customers.service';
 import { CustomersSidebarMenuComponent } from './customers/customers-sidebar-menu/customers-sidebar-menu.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CalendarService } from './calendar/org-calendar/calendar.service';
+import { CalendarDayComponent } from './calendar/calendar-day/calendar-day.component';
+import { AddCalendarEventComponent } from './calendar/event/add-calendar-event/add-calendar-event.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -29,8 +32,8 @@ const appRoutes: Routes = [
   { path: 'customers', component: CustomersListComponent },
   { path: 'customer/dashboard', component: CustomerDashboardComponent },
   { path: 'org/calendar', component: OrgCalendarComponent },
-  { path: 'customer/booking', component: OrgCalendarComponent }
-
+  { path: 'customer/booking', component: OrgCalendarComponent },
+  { path: 'customer/day/booking', component: CalendarDayComponent }
 ];
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ const appRoutes: Routes = [
     CustomerDashboardComponent,
     BarChartComponent,
     OrgCalendarComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    CalendarDayComponent,
+    AddCalendarEventComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +67,10 @@ const appRoutes: Routes = [
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    CustomersService
+    CustomersService,
+    CalendarService
   ],
-  entryComponents: [OrgCalendarComponent],
+  entryComponents: [OrgCalendarComponent, AddCalendarEventComponent ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

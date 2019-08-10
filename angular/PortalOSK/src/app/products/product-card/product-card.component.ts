@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { OrgCalendarComponent } from 'src/app/calendar/org-calendar/org-calendar.component';
 import { Router } from '@angular/router';
+import { CalendarEvent } from 'src/app/calendar/calendarEvent';
+import { CalendarService } from 'src/app/calendar/org-calendar/calendar.service';
+import { CalendarMonth } from 'src/app/calendar/calendar-month';
+import * as moment from 'moment/moment';
+
 
 @Component({
   selector: 'app-product-card',
@@ -9,15 +12,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnInit {
-  modalRef: BsModalRef;
-
-  constructor(private modalService: BsModalService, private router:Router) {}
+  calendar: CalendarMonth;
+  currentEvent: CalendarEvent;
+  constructor( private router: Router,
+               private calendarService: CalendarService) {}
 
   ngOnInit() {
+    this.calendar = this.calendarService.calendar;
+    this.currentEvent = this.calendar.weeks[this.calendarService.weekIndex].
+    days[this.calendarService.dayIndex].events[0];
   }
 
+  getNextBookingDate() {
+    return moment(this.currentEvent.dateFrom).format('DD MMMM YYYY');
+  }
+
+  getNextBookingTime() {
+    return moment(this.currentEvent.dateFrom).format('HH:mm');
+  }
   openModalCalendar() {
-  //  this.modalRef = this.modalService.show(OrgCalendarComponent);
-  this.router.navigate(['/customer/booking'])
+
+  this.router.navigate(['/customer/booking'] );
   }
 }
