@@ -26,8 +26,8 @@ export class CalendarDayComponent implements OnInit {
     if (this.calendarService.getCurrentDay() === undefined) {
       return this.router.navigate(['customer/booking']);
     }
-    this.calendarService.getFreeEvents();
-    this.freeEvents = this.calendarService.getFreeEvents();
+    this.calendarService.getFreeEvents(this.calendarService.dayIndex, this.calendarService.weekIndex);
+    this.freeEvents = this.calendarService.getFreeEvents(this.calendarService.dayIndex, this.calendarService.weekIndex);
 
   }
 
@@ -51,8 +51,5 @@ export class CalendarDayComponent implements OnInit {
       }
     });
   }
-  onHide() {
-    this.calendarService.getFreeEvents();
-    this.freeEvents = this.calendarService.getFreeEvents();
-  }
+
 }

@@ -39,14 +39,14 @@ export class CalendarService {
             const weekDay = moment(monthStartDay).startOf('month').add(i * 7, 'days').toDate();
             const week = new Week();
             week.number = moment(weekDay).week();
-            week.days = this.getWeekDays(weekDay);
+            week.days = this.getWeekDays(weekDay, i);
             weeks.push(week);
 
         }
         return weeks;
     }
 
-    getWeekDays(date: Date) {
+    getWeekDays(date: Date, weekIndex) {
 
         const days: Day[] = [];
         for (let i = 0; i < 7; i++) {
@@ -77,7 +77,7 @@ export class CalendarService {
         return this.week;
     }
 
-    getFreeEvents() {
+    getFreeEvents(dayIndex, weekIndex) {
        this.workingHours.startDateTime = moment(new Date()).startOf('day').add(8, 'hour').toDate();
        this.workingHours.endDateTime = moment(this.workingHours.startDateTime).add(12, 'hour').toDate();
        this.workingHours.duration = moment(this.workingHours.endDateTime).diff(moment(this.workingHours.startDateTime), 'hours');
@@ -92,13 +92,13 @@ export class CalendarService {
 
        return freeEvents.filter((item) => {
         // tslint:disable-next-line:prefer-for-of
-        return this.checkItem( item );
+        return this.checkItem( item, dayIndex, weekIndex );
       });
     }
-    checkItem(item: CalendarEvent) {
+    checkItem(item: CalendarEvent, dayIndex, weekIndex) {
 
-        const bookedEvents: CalendarEvent[] = this.getBookedEvents();
-        console.log(bookedEvents);
+        const bookedEvents: CalendarEvent[] = this.getBookedEvents(dayIndex, weekIndex);
+       
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < bookedEvents.length; i++) {
             if (moment(item.dateFrom).isSame(moment(bookedEvents[i].dateFrom))) {
@@ -111,7 +111,7 @@ export class CalendarService {
         this.calendar.weeks[this.weekIndex].days[this.dayIndex].events.push(event);
     }
 
-    getBookedEvents() {
-        return this.calendar.weeks[this.weekIndex].days[this.dayIndex].events;
+    getBookedEvents(dayIndex, weekIndex) {
+        return this.calendar.weeks[weekIndex].days[dayIndex].events;
     }
 }

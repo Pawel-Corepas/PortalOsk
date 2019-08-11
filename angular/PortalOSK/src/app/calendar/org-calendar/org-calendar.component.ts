@@ -12,6 +12,9 @@ import { Week } from '../week';
 })
 export class OrgCalendarComponent implements OnInit {
   calendar: CalendarMonth = new CalendarMonth();
+  freeHours = 12;
+  bookedHours = 0;
+  progress = '0%';
   constructor(private router: Router, private calendarService: CalendarService) { }
 
   ngOnInit() {
@@ -26,9 +29,20 @@ export class OrgCalendarComponent implements OnInit {
   }
 
   viewDay(day: Day, dayIndex, week: Week, weekIndex) {
-    console.log(dayIndex + ':' + weekIndex);
+
     this.calendarService.setDay(day, dayIndex);
     this.calendarService.setWeek(week, weekIndex);
     this.router.navigate(['customer/day/booking']);
+  }
+  getFreeDays(dayIndex, weekIndex) {
+    this.calendar.weeks[weekIndex].days[dayIndex].freeEventsCount = this.calendarService.getFreeEvents(dayIndex, weekIndex).length;
+    this.calendar = this.calendarService.calendar;
+    return this.calendar.weeks[weekIndex].days[dayIndex].freeEventsCount;
+  }
+  getProgress(dayIndex, weekIndex) {
+    this.bookedHours  = this.calendarService.getBookedEvents(dayIndex, weekIndex).length;
+    const progress =  (this.bookedHours / this.freeHours) * 100;
+    console.log(Math.round(progress) + '%');
+    return Math.round(progress) + '%';
   }
 }
