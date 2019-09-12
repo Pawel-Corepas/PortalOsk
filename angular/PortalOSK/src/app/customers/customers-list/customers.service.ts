@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Customer } from './customer';
+import { Customer } from '../customer';
 import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 @Injectable()
 export class CustomersService {
@@ -33,6 +34,8 @@ export class CustomersService {
             userAccountBalance: -1900.00,
             lessonsCount: 12,
             lastLessonDate: new Date('2019-12-07'),
+            products: [],
+            status: null,
             links: [
                 {
                     resourceType: 'COURSES',
@@ -65,6 +68,8 @@ export class CustomersService {
             userAccountBalance: -1900.00,
             lessonsCount: 12,
             lastLessonDate: new Date('2019-12-07'),
+            products: [],
+            status: null,
             links: [
                 {
                     resourceType: 'COURSES',
@@ -97,6 +102,8 @@ export class CustomersService {
             userAccountBalance: -1900.00,
             lessonsCount: 12,
             lastLessonDate: new Date('2019-12-07'),
+            products: [],
+            status: null,
             links: [
                 {
                     resourceType: 'COURSES',

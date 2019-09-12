@@ -1,8 +1,8 @@
-<button type="button" (click)="backToCustomerDashboard()" class="btn btn-outline-primary m-2"> <i
+<button type="button" (click)="backToCustomerDashboard()" class="btn btn-outline-primary m-2 position-absolute"> <i
   class="fa fa-arrow-left font-size-3 text-dark" aria-hidden="true"></i></button>
 <div class="d-flex justify-content-center">
  
-  <div class="container m-5 calendar-popup bg-gradient-secondary text-white">
+  <div class="container m-1 calendar-popup bg-gradient-secondary text-white">
     <div class="row">
       <div class="col">
         <h2 class="m-2">Kalendarz - Grzegorz Biś</h2>
@@ -29,13 +29,15 @@
           </thead>
           <tbody *ngIf="calendar">
             <tr *ngFor='let week of calendar.weeks; let i = index'>
-              <td scope="row" (click)="viewDay(day, y, week, i)" *ngFor='let day of week.days; let y = index' class="cal-grid-cell-month  align-middle ">
+              <td scope="row" (click)="viewDay(day, y, week, i)" *ngFor='let day of week.days; let y = index' 
+              class="cal-grid-cell-month  align-middle "
+              [ngClass]="{'today' : isToday(day.date)}" >
                 <div class="row">
                   <div class="col">{{getDayInMonth(day.date)}}</div>
                   <div class="col text-right"><i class="fa fa-plus" aria-hidden="true"></i></div>
                 </div>
                 <div class="progress bg-success my-3">
-                  <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width': getProgress(y, i)}" aria-valuenow="10"
+                  <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width': getProgress(day.date)}" aria-valuenow="10"
                     aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <p  class="card-text"><small class="text-white">{{'Wolne godziny: ' + getFreeDays(y,i) }}</small></p>

@@ -1,7 +1,8 @@
 import { LinkedList } from 'ngx-bootstrap';
 import { Link } from 'src/app/link';
+import { Product } from 'src/app/products/product';
 
-export class Customer{
+export class Customer {
     id: string;
     firstName: string;
     lastName: string;
@@ -10,5 +11,7 @@ export class Customer{
     userAccountBalance: number;
     lessonsCount: number;
     lastLessonDate: Date;
+    products: Product [];
+    status: CustomerStatus;
     links: Link[];
 }

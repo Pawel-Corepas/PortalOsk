@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../org-calendar/calendar.service';
 import * as moment from 'moment/moment';
 import { Router } from '@angular/router';
-import { CalendarEvent } from '../calendarEvent';
+
 import { Day } from '../day';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AddCalendarEventComponent } from '../event/add-calendar-event/add-calendar-event.component';
+import { CalendarEvent } from '../calendarEvent';
 
 @Component({
   selector: 'app-calendar-day',
@@ -26,9 +27,9 @@ export class CalendarDayComponent implements OnInit {
     if (this.calendarService.getCurrentDay() === undefined) {
       return this.router.navigate(['customer/booking']);
     }
-    this.calendarService.getFreeEvents(this.calendarService.dayIndex, this.calendarService.weekIndex);
-    this.freeEvents = this.calendarService.getFreeEvents(this.calendarService.dayIndex, this.calendarService.weekIndex);
-
+    this.freeEvents = this.calendarService.getFreeEvents(
+      this.calendarService.day.date, this.calendarService.dayIndex, this.calendarService.weekIndex);
+    console.log(this.freeEvents);
   }
 
   formatDay() {

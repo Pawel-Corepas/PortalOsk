@@ -5,8 +5,10 @@ import { Week } from '../week';
 import { Day } from '../day';
 import { getDay } from 'ngx-bootstrap';
 import { WorkingHours } from '../working-hours';
-import { CalendarEvent } from '../calendarEvent';
+
 import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
+import { CalendarEvent } from '../calendarEvent';
+import { EventsService } from '../event/events.service';
 
 @Injectable()
 export class CalendarService {
@@ -19,10 +21,15 @@ export class CalendarService {
     dayIndex;
     weekIndex;
 
+    constructor(private eventsService: EventsService) {
+
+    }
+
     getCalendar(date: Date) {
         if (this.calendar === undefined) {
             this.calendar = new CalendarMonth ();
             moment.locale('pl');
+            this.calendar.id = '1';
             this.calendar.name = moment(date).format('MMMM');
             this.calendar.year = moment(date).format('YYYY');
             this.calendar.numberOfDays = moment(date).daysInMonth();
@@ -35,7 +42,7 @@ export class CalendarService {
 
         const weeks: Week[] = [];
         const monthStartDay = moment(date).startOf('month').toDate();
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             const weekDay = moment(monthStartDay).startOf('month').add(i * 7, 'days').toDate();
             const week = new Week();
             week.number = moment(weekDay).week();
@@ -77,8 +84,8 @@ export class CalendarService {
         return this.week;
     }
 
-    getFreeEvents(dayIndex, weekIndex) {
-       this.workingHours.startDateTime = moment(new Date()).startOf('day').add(8, 'hour').toDate();
+    getFreeEvents(day: Date, dayIndex, weekIndex) {
+       this.workingHours.startDateTime = moment(day).startOf('day').add(8, 'hour').toDate();
        this.workingHours.endDateTime = moment(this.workingHours.startDateTime).add(12, 'hour').toDate();
        this.workingHours.duration = moment(this.workingHours.endDateTime).diff(moment(this.workingHours.startDateTime), 'hours');
        const freeEvents: CalendarEvent[] = [];
@@ -92,13 +99,14 @@ export class CalendarService {
 
        return freeEvents.filter((item) => {
         // tslint:disable-next-line:prefer-for-of
-        return this.checkItem( item, dayIndex, weekIndex );
+        return this.checkItem( item, dayIndex, weekIndex, day );
       });
     }
-    checkItem(item: CalendarEvent, dayIndex, weekIndex) {
+    checkItem(item: CalendarEvent, dayIndex, weekIndex, date) {
 
-        const bookedEvents: CalendarEvent[] = this.getBookedEvents(dayIndex, weekIndex);
-       
+        //const bookedEvents: CalendarEvent[] = this.getBookedEvents(dayIndex, weekIndex);
+        const bookedEvents: CalendarEvent[] = this.eventsService.getEventsByCalendarIdAndDay(
+            this.calendar.id, date);
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < bookedEvents.length; i++) {
             if (moment(item.dateFrom).isSame(moment(bookedEvents[i].dateFrom))) {
@@ -109,9 +117,10 @@ export class CalendarService {
     }
     bookEvent(event: CalendarEvent) {
         this.calendar.weeks[this.weekIndex].days[this.dayIndex].events.push(event);
+        console.log(this.calendar);
     }
 
-    getBookedEvents(dayIndex, weekIndex) {
+   /* getBookedEvents(dayIndex, weekIndex) {
         return this.calendar.weeks[weekIndex].days[dayIndex].events;
-    }
+    }*/
 }

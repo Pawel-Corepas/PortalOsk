@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from './customers.service';
-import { Customer } from './customer';
+import { Customer } from '../customer';
 import * as moment from 'moment/moment';
 import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
 @Component({

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CalendarEvent } from 'src/app/calendar/calendarEvent';
+
 import { CalendarService } from 'src/app/calendar/org-calendar/calendar.service';
 import { CalendarMonth } from 'src/app/calendar/calendar-month';
 import * as moment from 'moment/moment';
+import { CalendarEvent } from 'src/app/calendar/calendarEvent';
 
 
 @Component({
@@ -33,5 +34,9 @@ export class ProductCardComponent implements OnInit {
   openModalCalendar() {
 
   this.router.navigate(['/customer/booking'] );
+  }
+
+  openTheorySchedule() {
+    this.router.navigate(['/customer/product/events']);
   }
 }
