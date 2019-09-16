@@ -10,4 +10,5 @@ customerId: string;
 productId: string;
 calendarId: string;
 type: EventTypeEnum;
+used: boolean;
 }

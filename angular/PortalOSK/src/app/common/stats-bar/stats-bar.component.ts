@@ -13,7 +13,7 @@ export class StatsBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.stats)
+ 
   }
 
 }

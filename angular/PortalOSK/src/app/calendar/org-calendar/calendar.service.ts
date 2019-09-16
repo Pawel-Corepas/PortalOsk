@@ -20,7 +20,8 @@ export class CalendarService {
     workingHours: WorkingHours = new WorkingHours();
     dayIndex;
     weekIndex;
-
+    eventsInIntervalCount;
+    currentEvent: CalendarEvent  = new CalendarEvent ();
     constructor(private eventsService: EventsService) {
 
     }
@@ -35,6 +36,7 @@ export class CalendarService {
             this.calendar.numberOfDays = moment(date).daysInMonth();
             this.calendar.weeks = this.getWeeks(date);
         }
+        console.log(this.calendar);
         return this.calendar;
     }
 
@@ -60,10 +62,30 @@ export class CalendarService {
             const day = new Day();
             day.date = moment(date).startOf('week').add(i, 'days').toDate();
             day.events = [];
+            day.intervals = this.getIntervals(day.date);
             days.push(day);
         }
 
         return days;
+    }
+
+    getIntervals(date: Date) {
+        const intervals: CalendarEvent [] = [];
+        const dayMinutes = 60 * 12;
+        const eventInterval = 60;
+        this.eventsInIntervalCount = dayMinutes / eventInterval;
+        this.currentEvent.dateTo = moment(date).add(8, 'hours').toDate();
+
+        for (let i = 0; i < this.eventsInIntervalCount; i++) {
+            const internalEvent = new CalendarEvent ();
+            internalEvent.dateFrom = this.currentEvent.dateTo ;
+            internalEvent.dateTo = moment(internalEvent.dateFrom).add(eventInterval, 'minutes').toDate();
+            internalEvent.used = false;
+            this.currentEvent = internalEvent ;
+            intervals.push(this.currentEvent);
+        }
+
+        return intervals;
     }
 
     setDay(day: Day, index ) {
@@ -104,7 +126,6 @@ export class CalendarService {
     }
     checkItem(item: CalendarEvent, dayIndex, weekIndex, date) {
 
-        //const bookedEvents: CalendarEvent[] = this.getBookedEvents(dayIndex, weekIndex);
         const bookedEvents: CalendarEvent[] = this.eventsService.getEventsByCalendarIdAndDay(
             this.calendar.id, date);
         // tslint:disable-next-line:prefer-for-of
@@ -117,7 +138,7 @@ export class CalendarService {
     }
     bookEvent(event: CalendarEvent) {
         this.calendar.weeks[this.weekIndex].days[this.dayIndex].events.push(event);
-        console.log(this.calendar);
+
     }
 
    /* getBookedEvents(dayIndex, weekIndex) {

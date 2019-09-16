@@ -12,7 +12,7 @@ export class StatsBarItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.statItem)
+
   }
 
   onResized(event) {

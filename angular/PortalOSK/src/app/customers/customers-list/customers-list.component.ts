@@ -16,7 +16,7 @@ export class CustomersListComponent implements OnInit {
   ngOnInit() {
     this.customers = this.customersService.GetCustomers();
     this.stats = this.customersService.GetStats();
-    console.log(this.stats);
+
   }
   formatDate(date: Date) {
     const newDateFormat = moment(date).format('L');

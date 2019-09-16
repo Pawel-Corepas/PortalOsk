@@ -29,7 +29,6 @@ export class CalendarDayComponent implements OnInit {
     }
     this.freeEvents = this.calendarService.getFreeEvents(
       this.calendarService.day.date, this.calendarService.dayIndex, this.calendarService.weekIndex);
-    console.log(this.freeEvents);
   }
 
   formatDay() {
@@ -45,7 +44,7 @@ export class CalendarDayComponent implements OnInit {
   }
 
   bookEvent(event: CalendarEvent) {
-    console.log('booking event');
+   
     this.modalRef = this.modalService.show(AddCalendarEventComponent, {
       initialState: {
         data: event

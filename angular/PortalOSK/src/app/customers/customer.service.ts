@@ -15,7 +15,7 @@ export class CustomerService {
 
     addProduct() {
      this.customer.products = this.productService.getProducts();
-     console.log('product initiated');
+
     }
 
     getCustomerProducts() {

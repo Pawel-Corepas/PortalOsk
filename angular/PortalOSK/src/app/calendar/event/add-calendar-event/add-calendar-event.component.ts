@@ -33,13 +33,13 @@ export class AddCalendarEventComponent implements OnInit {
     moment(this.data.dateFrom).format( 'HH:mm') + ', czas jazdy: ' + this.data.duration + 'h';
   }
   book() {
-    console.log(this.data);
+   
     this.data.createdBy = 'Paweł Skórniewski';
     this.data.description = 'Jazda do Piotrkowa';
     this.data.calendarId = this.calendarService.calendar.id;
     this.data.customerId = this.customerService.customer.id;
 
-    console.log(this.customerService.customer);
+   
     this.data.productId = this.customerService.customer.products[0].id;
     this.data.type = EventTypeEnum.practiceLesson;
     this.calendarService.bookEvent(this.data);
