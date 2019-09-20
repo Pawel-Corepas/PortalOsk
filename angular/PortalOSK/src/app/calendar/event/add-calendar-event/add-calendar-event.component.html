@@ -1,12 +1,76 @@
-<div  class="card">
-    <div class="card-header shadow p-3 bg-gradient-secondary text-white">
+<!--    <div class="card-header shadow p-3 bg-gradient-secondary text-white">
         <h2 class="text-center">Rezerwacja Jazdy</h2>
     </div>
     <div class="card-body">
         <h4 class="card-title">{{formatDate()}}</h4>
         <p class="card-text">Instruktor: Grzegorz Biś</p>
     </div>
-    <div class="card-footer text-muted">
-        <button type="button" (click)="book()" class="btn btn-primary" btn-lg btn-block> Rezerwuj</button>
+    <div class="card-footer text-muted text-right">
+        <button type="button" class="btn btn-danger" btn-lg btn-block> Rezerwuj</button>
     </div>
+</div> -->
+<div class="card">
+        <div class="">
+                <div class="card-header shadow p-3 bg-gradient-secondary text-white">
+                    <h2 class="text-center">Rezerwacja Jazdy</h2>
+                </div>
+            </div>
+    <form class="border border-light p-5">
+        
+        <div class="">
+            <div class="">
+                <h4 class="m-1 p-2"><i class="far fa-person m-1 p-2"></i>Instruktor: Grzegorz Biś</h4>
+            </div>
+        </div>
+        <div class="">
+            <i class="far fa-calendar-alt m-1 p-2"></i>3 Sierpnia 2018 <br>
+            <i class="far fa-clock m-1 p-2"></i> Godzina 14:00
+        </div>
+
+        <div class="">
+            <p>
+                <a href="" target="_blank">Regulamin Rezerwacji Jazd</a>
+            </p>
+        </div>
+        <div class="form-group ">
+                <label for="exampleFormControlSelect2">Długość Zajęć:</label>
+                <select class="form-control mb-4 initialized shadow" id="exampleFormControlSelect2">
+                  <option>Wybierz długość zajęć</option>
+                  <option>1 Godzina</option>
+                  <option>2 Godziny</option>
+                  <option>3 Godziny</option>
+                  <option>Jazda łączona, 2 Godziny</option>
+                </select>
+              </div>
+
+<div class="">
+        <label for="additionalInfo">Dodatkowe Informacje:</label>
+    <input type="text" id="additionalInfo" class="form-control mb-4 shadow" placeholder="Dodatkowe Informacje">
+</div>
+
+            <div class="form-group ">
+                    <label for="exampleFormControlSelect2">Miejsce spotkania z Instruktorem:</label>
+                    <select class="form-control mb-4 initialized shadow" id="exampleFormControlSelect1">
+                      <option>Wybierz miejsce spotkania z instruktorem</option>
+                      <option>Siedziba Ośrodka, Ul Kościuszki 65, Radomsko</option>
+                      <option>Plac Manewrowy, Ul Zmyślona 87, Radomsko</option>
+                      <option>Pod Kościołem Sw Anny, Kietlin</option>
+                      <option>Przyjeź po mnie</option>
+                    </select>
+                  </div>
+
+<div class="">
+    <div class="d-flex justify-content-between ">
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                <label class="custom-control-label" for="defaultLoginFormRemember">Zapamiętaj to miejsce</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <button class="btn btn-danger btn-block my-4" (click)="book()"><h5>Rezerwuj</h5></button>
+</div>
+</form>
 </div>
