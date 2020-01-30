@@ -44,11 +44,12 @@ export class CalendarDayComponent implements OnInit {
   }
 
   bookEvent(event: CalendarEvent) {
-   
+
     this.modalRef = this.modalService.show(AddCalendarEventComponent, {
       initialState: {
         data: event
-      }
+      },
+      class: 'w700'
     });
   }
 

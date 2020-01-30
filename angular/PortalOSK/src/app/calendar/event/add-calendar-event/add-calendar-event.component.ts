@@ -38,8 +38,6 @@ export class AddCalendarEventComponent implements OnInit {
     this.data.description = 'Jazda do Piotrkowa';
     this.data.calendarId = this.calendarService.calendar.id;
     this.data.customerId = this.customerService.customer.id;
-
-   
     this.data.productId = this.customerService.customer.products[0].id;
     this.data.type = EventTypeEnum.practiceLesson;
     this.calendarService.bookEvent(this.data);

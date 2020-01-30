@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="">
+        <div class="card-header shadow p-3 bg-gradient-secondary text-white">
+            <h2 class="text-center">Rejestracja Wpłaty</h2>
+        </div>
+    </div>
+    <form [formGroup]="payment" class="border border-light p-5">
+
+        <div class="">
+            <div class="">
+                <h4 class="m-1 p-2"><i class="far fa-person m-1 p-2"></i>{{'Kursant: '+ data.name + ' ' +data.surname}}
+                </h4>
+            </div>
+        </div>
+        <div class="">
+            <i class="far fa-calendar-alt m-1 p-2"></i>3 Sierpnia 2018 <br>
+            <i class="far fa-clock m-1 p-2"></i> Godzina 14:00
+        </div>
+
+        <div class="form-group">
+
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Kwota Wpłaty</label>
+            <input type="number" id="amount" class="form-control mb-4 shadow" formControlName="amount"
+                placeholder="Kwota">
+        </div>
+
+        <div class="form-group">
+            <label for="paidTo">Przyjmujący Wpłatę</label>
+            <input type="text" id="paidTo" class="form-control mb-4 shadow" formControlName="paidTo"
+                placeholder="Grzegorz Biś">
+        </div>
+
+        <div class="form-group">
+            <label for="paidBy">Wpłacający</label>
+            <input type="text" id="paidBy" class="form-control mb-4 shadow" formControlName="paidBy"
+                placeholder="'data.name'+' '+'data.surname'">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Dodatkowe Informacje</label>
+            <input type="text" id="description" class="form-control mb-4 shadow" formControlName="description"
+                placeholder="Dodatkowe Informacje">
+        </div>
+
+
+
+
+        <div class="d-flex justify-content-between ">
+            <div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                    <label class="custom-control-label" for="defaultLoginFormRemember">Wyślij potwierdzenie wpłaty na
+                        adres email.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+            <button type="button" class="btn btn-danger btn-block my-4" (click)="onSubmit()">
+                <h5>Dodaj Wpłatę</h5>
+            </button>
+        </div>
+    </form>
+</div>

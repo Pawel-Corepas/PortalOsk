@@ -3,10 +3,11 @@ import { Product } from '../products/product';
 import { Customer } from './customer';
 import { ProductService } from '../products/produc.service';
 import { CustomersService } from './customers-list/customers.service';
+import { Students } from 'rest_client_1.0/model/students';
 
 @Injectable ()
 export class CustomerService {
-    customer: Customer = new Customer ();
+    customer: Customer;
 
     constructor( private productService: ProductService, private customersService: CustomersService) {
         this.customer = this.customersService.customers[2];
@@ -19,7 +20,7 @@ export class CustomerService {
     }
 
     getCustomerProducts() {
-     return this.customer.products;
+    return this.customer.products;
     }
 
 }

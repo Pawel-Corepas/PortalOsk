@@ -1,0 +1,161 @@
+<div class="">
+    <div class="card-header p-3 bg-gradient-secondary text-white">
+        <h2 class="text-center">Szczegóły Kursanta</h2>
+    </div>
+</div>
+
+<div class="card">
+    <form [formGroup]="student" class="m-5">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Imię</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <input id="name" formControlName="name" placeholder="Imię" type="text" required="required"  [value]="data.name" 
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="surname">Nazwisko</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user-md"></i>
+                        </div>
+                    </div>
+                    <input id="surname" formControlName="surname" placeholder="Nazwisko" type="text" required="required" [value]="data.surname" 
+                        class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="mobileNumber">Numer Telefonu</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                    </div>
+                    <input id="mobileNumber" formControlName="mobileNumber" placeholder="Numer Telefonu" type="text" [value]="data.mobileNumber" 
+                        class="form-control" required="required">
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Adres email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-at"></i>
+                        </div>
+                    </div>
+                    <input id="email" formControlName="email" placeholder="Adres email" type="text" class="form-control" [value]="data.email" 
+                        required="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="street">Ulica</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="street" formControlName="street" placeholder="Ulica" type="text"  [value]="data.street" 
+                            class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="postalCode">Kod Pocztowy</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="postalCode" formControlName="postalCode" placeholder="00-000" type="text" [value]="data.postalCode" 
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="town">Miejscowość</label>
+                    <input id="town" formControlName="town" placeholder="Miejscowość" type="text" class="form-control" [value]="data.town" 
+                        required="required">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="birthPlace">Miejsce Urodzenia</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="birthPlace" formControlName="birthPlace" placeholder="Miejsce Urodzenia" type="text" [value]="data.birthPlace" 
+                            class="form-control" required="required">
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="personalIdentificationNumber">PESEL</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="personalIdentificationNumber" formControlName="personalIdentificationNumber"  [value]="data.personalIdentificationNumber" 
+                            placeholder="Pesel" type="text" class="form-control" required="required">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="courseCategory">Kategoria Kursu</label>
+            <div>
+                <select id="courseCategory" class="form-control" formControlName="courseCategory" 
+                    aria-describedby="courseCategoryHelpBlock" required="required">
+                    <option value=""> Wybierz Kategorie</option>
+                    <option [selected]="isSelected('A')" value="A">A</option>
+                    <option [selected]="isSelected('B')" value="B">B</option >
+                    <option [selected]="isSelected('C')" value="C">C</option>
+                    <option [selected]="isSelected('C+E')" value="C+E">C+E</option>
+                    <option [selected]="isSelected('D')" value="D">D</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="individualCourse"></label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="individualCourse"
+                    id="individualCourse">
+                <label class="form-check-label" for="gridCheck">
+                    Dodaj automatycznie kurs indywidualny
+                </label>
+            </div>
+        </div>
+        </div>
+        <div class="form-group float-right">
+            <button type="button" (click)="onCancel()" class="btn btn-outline-primary">Anuluj</button>
+            <button type="button" *ngIf="student.enabled"(click)="onCancelEdit()" class="btn btn-outline-primary">Wstecz</button>
+            <button name="submit" type="button" *ngIf="student.disabled" (click)="onEdit()" class="btn btn-primary mx-2">Edytuj
+                Kursanta</button>
+            <button name="submit2" type="button"  *ngIf="student.enabled" (click)="onSubmitEdit()" class="btn btn-primary mx-2">Zapisz Zmiany
+                    </button>
+
+        </div>
+    </form>
+</div>

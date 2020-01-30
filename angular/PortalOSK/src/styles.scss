@@ -119,9 +119,11 @@ body {
   max-width: 900px;
 }
 
-
+.w700{
+  max-width: 700px !important;
+}
 .modal-dialog {
-  //max-width: 1224px;
+  max-width: 1114px;
   //margin: 1.75rem auto;
  // min-height: 1000px;
   box-sizing: border-box;
@@ -153,9 +155,18 @@ body {
   background-color: rgba(54, 2, 27, 1);
 }
 
-.lesson-box{
-  
+.clickable{
+  cursor: pointer;
 }
 .used{
   background-color: red;
+}
+
+.dropdown-menu-left-1{
+  top:0;
+  right:0;
+}
+
+.container-fluid{
+padding: 0 !important;
 }

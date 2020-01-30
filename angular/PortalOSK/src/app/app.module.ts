@@ -27,6 +27,14 @@ import { ProductEventComponent } from './products/product-events/product-event/p
 import { ProductService } from './products/produc.service';
 import { CustomerService } from './customers/customer.service';
 import { EventsService } from './calendar/event/events.service';
+import { ApiModule, BASE_PATH } from 'rest_client_1.0';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { CustomerAddComponent } from './customers/customer-add/customer-add.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
+import { PaymentsDashboardComponent } from './payments/payments-dashboard/payments-dashboard.component';
+import { PaymentAddComponent } from './payments/payment-add/payment-add.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -55,7 +63,11 @@ const appRoutes: Routes = [
     CalendarDayComponent,
     AddCalendarEventComponent,
     ProductEventsComponent,
-    ProductEventComponent
+    ProductEventComponent,
+    CustomerAddComponent,
+    CustomerDetailsComponent,
+    PaymentsDashboardComponent,
+    PaymentAddComponent
   ],
   imports: [
     BrowserModule,
@@ -68,20 +80,26 @@ const appRoutes: Routes = [
     AngularResizedEventModule,
     RouterModule.forRoot(appRoutes),
     ChartsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    HttpClientModule,
+    ApiModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
+    { provide: BASE_PATH, useValue: environment.API_BASE_PATH },
     CustomersService,
     CalendarService,
     ProductService,
     CustomerService,
     EventsService
   ],
-  entryComponents: [OrgCalendarComponent, AddCalendarEventComponent ],
+  entryComponents: [OrgCalendarComponent, AddCalendarEventComponent, CustomerAddComponent, CustomerDetailsComponent,
+                    PaymentAddComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
