@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -35,6 +35,17 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { PaymentsDashboardComponent } from './payments/payments-dashboard/payments-dashboard.component';
 import { PaymentAddComponent } from './payments/payment-add/payment-add.component';
+import { InstructorAssignComponent } from './instructors/instructor-assign/instructor-assign.component';
+import { InstructorAddComponent } from './instructors/instructor-add/instructor-add.component';
+import { CourseAddComponent } from './courses/course-add/course-add.component';
+import { CourseAssignComponent } from './courses/course-assign/course-assign.component';
+import { LessonAddComponent } from './lessons/lesson-add/lesson-add.component';
+import { CourseDashboardComponent } from './courses/course-dashboard/course-dashboard.component';
+import { CourseDetailsComponent } from './courses/course-details/course-details.component';
+import { AmountService } from './common/services/amount.service';
+import { CategoriesService } from './common/services/categories.service';
+import { StudentsService } from './customers/students.service';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -43,12 +54,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 const appRoutes: Routes = [
 
   { path: 'customers', component: CustomersListComponent },
+  { path: 'courses', component: CourseDashboardComponent },
   { path: 'customer/dashboard', component: CustomerDashboardComponent },
   { path: 'org/calendar', component: OrgCalendarComponent },
   { path: 'customer/booking', component: OrgCalendarComponent },
   { path: 'customer/day/booking', component: CalendarDayComponent },
   { path: 'customer/product/events', component: ProductEventsComponent }
 ];
+export function init_app(appLoadService: CategoriesService) {
+  console.log("app Initialized")
+  return () => appLoadService.getCategories();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +83,14 @@ const appRoutes: Routes = [
     CustomerAddComponent,
     CustomerDetailsComponent,
     PaymentsDashboardComponent,
-    PaymentAddComponent
+    PaymentAddComponent,
+    InstructorAssignComponent,
+    InstructorAddComponent,
+    CourseAddComponent,
+    CourseAssignComponent,
+    LessonAddComponent,
+    CourseDashboardComponent,
+    CourseDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -96,10 +119,14 @@ const appRoutes: Routes = [
     CalendarService,
     ProductService,
     CustomerService,
-    EventsService
+    EventsService,
+    AmountService,
+    CategoriesService,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [CategoriesService], multi: true },
+    StudentsService
   ],
   entryComponents: [OrgCalendarComponent, AddCalendarEventComponent, CustomerAddComponent, CustomerDetailsComponent,
-                    PaymentAddComponent],
+                    PaymentAddComponent,InstructorAssignComponent, CourseAssignComponent,CourseAddComponent, InstructorAddComponent,LessonAddComponent, CourseDetailsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

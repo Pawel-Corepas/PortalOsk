@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { CustomerSidebarService } from './customers/customers-sidebar-menu/customer-sidebar-service';
 import { ResizedEvent } from 'angular-resize-event';
+import { CategoriesService } from './common/services/categories.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ import { ResizedEvent } from 'angular-resize-event';
 export class AppComponent  {
   title = 'customer-sidenav';
 
-  constructor(public sidebarservice: CustomerSidebarService) { }
+  constructor(public sidebarservice: CustomerSidebarService,
+              private categoriesService: CategoriesService) { 
+                this.categoriesService.getCategories();
+              }
   onResized(event) {
     if(event.target.window.innerWidth< 1768){
       this.hideSidebar()
