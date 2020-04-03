@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StudentsPaymentsControllerService, Payments, Students } from 'rest_client_1.0';
+import { AmountService } from 'src/app/common/services/amount.service';
 
 @Component({
   selector: 'app-payment-add',
@@ -13,7 +14,8 @@ export class PaymentAddComponent implements OnInit {
   payment: FormGroup;
   @Input() data: Students;
   constructor(private bsModalRef: BsModalRef,
-              private paymentsService: StudentsPaymentsControllerService) { }
+              private paymentsService: StudentsPaymentsControllerService,
+              private amountService : AmountService) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -21,7 +23,7 @@ export class PaymentAddComponent implements OnInit {
       {
         amount: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
-        studentsId: new FormControl(this.data.id),
+        studentsId: new FormControl(this.data._id),
         date:  new FormControl(new Date()),
         paidBy: new FormControl(this.data.name + ' ' + this.data.surname),
         paidTo: new FormControl('Grzegorz Biś')
@@ -35,9 +37,9 @@ export class PaymentAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.payment.value);
+    this.payment.value.amount = this.amountService.convertToMinorUnits(this.payment.value.amount)
     const payments: Payments = this.payment.value;
-    this.paymentsService.studentsPaymentsControllerCreate(this.data.id, payments).subscribe(
+    this.paymentsService.studentsPaymentsControllerCreate(this.data._id, payments).subscribe(
       (response) => {
         console.log(response);
         this.bsModalRef.hide();

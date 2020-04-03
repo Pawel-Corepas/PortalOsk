@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
-import { StudentsControllerService, Students } from 'rest_client_1.0';
+import { StudentsControllerService, Students, Categories } from 'rest_client_1.0';
 import { defaultLocaleWeekdaysShort } from 'ngx-bootstrap/chronos/locale/locale.class';
+import { CategoriesService } from 'src/app/common/services/categories.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -11,12 +12,15 @@ import { defaultLocaleWeekdaysShort } from 'ngx-bootstrap/chronos/locale/locale.
 })
 export class CustomerDetailsComponent implements OnInit, AfterContentInit {
   student: FormGroup;
+  categories: Categories[];
   @Input() data: Students;
 
   constructor(private bsModalRef: BsModalRef,
-              private studentsService: StudentsControllerService) { }
+              private studentsService: StudentsControllerService,
+              private categoriesService: CategoriesService) { }
 
   ngOnInit() {
+      this.categories = this.categoriesService.getCategories();
        this.student = new FormGroup (
       {
         name: new FormControl(this.data.name , [ Validators.required]),
@@ -28,17 +32,19 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
         street: new FormControl(this.data.street),
         mobileNumber: new FormControl(this.data.mobileNumber),
         email: new FormControl(this.data.email),
-        courseCategory: new FormControl(this.data.courseCategory)
+        categoriesId: new FormControl(this.data.categoriesId)
       }
     );
        this.student.disable();
+       console.log(this.student)
   }
   ngAfterContentInit() {
     console.log(this.data.name);
   }
 
-  isSelected(event) {
-   if (event === this.data.courseCategory) {
+  isSelected(categoryId) {
+
+   if (categoryId === this.data.categoriesId) {
      return true;
    } else {
     return false;
@@ -58,7 +64,7 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
   onSubmitEdit() {
     console.log('zapisuje zmiany');
     const students: Students = this.student.value;
-    this.studentsService.studentsControllerReplaceById(this.data.id, students).subscribe(
+    this.studentsService.studentsControllerReplaceById(this.data._id, students).subscribe(
       (response) => {
         console.log(response);
         this.bsModalRef.hide();

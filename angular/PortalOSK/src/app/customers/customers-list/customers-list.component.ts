@@ -5,13 +5,20 @@ import * as moment from 'moment/moment';
 import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
 import { Students } from 'rest_client_1.0/model/students';
 import { StudentsControllerService, FilterRequest, StudentsPaymentsControllerService,
-         ListPaymentsForStudentResponse } from 'rest_client_1.0';
-import { Router } from '@angular/router';
+         ListPaymentsForStudentResponse, 
+         Categories,
+         CoursesControllerService} from 'rest_client_1.0';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { CustomerAddComponent } from '../customer-add/customer-add.component';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PaymentAddComponent } from 'src/app/payments/payment-add/payment-add.component';
+import { CourseAssignComponent } from 'src/app/courses/course-assign/course-assign.component';
+import { InstructorAssignComponent } from 'src/app/instructors/instructor-assign/instructor-assign.component';
+import { LessonAddComponent } from 'src/app/lessons/lesson-add/lesson-add.component';
+import { AmountService } from 'src/app/common/services/amount.service';
+import { CategoriesService } from 'src/app/common/services/categories.service';
+import { isArray } from 'util';
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -20,6 +27,7 @@ import { PaymentAddComponent } from 'src/app/payments/payment-add/payment-add.co
 export class CustomersListComponent implements OnInit {
   customers: Customer[];
   students: Students[];
+  categories: Categories[];
   stats: StatItem[];
   modalRef: BsModalRef;
   search: FormGroup;
@@ -27,7 +35,8 @@ export class CustomersListComponent implements OnInit {
   filter: FilterRequest = {
     limit: 20,
     offset: 0,
-    queryString: ''
+    queryString: '',
+    studentsId: null
   };
   total;
 
@@ -35,12 +44,15 @@ export class CustomersListComponent implements OnInit {
   constructor(private customersService: CustomersService,
               private studentsService: StudentsControllerService,
               private paymentsForStudentService: StudentsPaymentsControllerService,
-              private router: Router,
-              private modalService: BsModalService) {
-                this.refreshPage();
+              private courseService: CoursesControllerService,
+              private amountService: AmountService,
+              private modalService: BsModalService,
+              private categoryService: CategoriesService) {
+               
   }
 
   ngOnInit() {
+   
     this.customers = this.customersService.GetCustomers();
     this.stats = this.customersService.GetStats();
 
@@ -49,6 +61,7 @@ export class CustomersListComponent implements OnInit {
         searchString: new FormControl('')
       }
     );
+    this.refreshPage();
   }
 
   refreshPage() {
@@ -70,15 +83,55 @@ export class CustomersListComponent implements OnInit {
           }
         }
         this.students = response.data;
+        for (let index = 0; index < this.students.length; index++) {
+          const student = this.students[index];
+            this.getStudentCourseData(student, index)
+        }
+        
+        this.stats[0].value= response.summary.candidates,
+        this.stats[1].value= response.summary.customers,
+        this.stats[2].value= response.summary.archivedCustomers
+        this.getBalance();
+        this.categories = this.categoryService.getCategories();
       }
     );
   }
+
+  getCourseData(courseId,index, studentIndex){
+    console.log(courseId)
+    this.courseService.coursesControllerFindById(courseId).subscribe(
+      (course) =>{
+        console.log(course)
+        this.students[studentIndex].courses[index] = course
+      }
+    )
+   
+}
+  getStudentCourseData(student, studentIndex){
+
+    for (let index = 0; index < student.courses.length; index++) {
+      const course = student.courses[index];
+      this.getCourseData(course, index, studentIndex)
+      
+    }
+        console.log(this.students)
+      
+  }
+
+
+
 
   getPaginatedStudents(filter: FilterRequest) {
     console.log(this.filter);
     this.studentsService.studentsControllerFilterStudents(filter).subscribe(
       (response) => {
         this.students = response.data;
+        for (let index = 0; index < this.students.length; index++) {
+          const student = this.students[index];
+            this.getStudentCourseData(student, index)
+        }
+        
+        this.getBalance();
       }
     );
   }
@@ -128,15 +181,17 @@ export class CustomersListComponent implements OnInit {
       );
   }
 
-  getBalance(id: number) {
-  let balance = '0';
-  this.paymentsForStudentService.studentsPaymentsControllerFilterStudentPayments(id, this.filter).subscribe(
-      (paymentResponse: ListPaymentsForStudentResponse) => {
-        console.log(paymentResponse.totalPaid);
-        balance = paymentResponse.totalPaid;
-      }
-    );
-  return balance;
+  getBalance() {
+ 
+     for (let index = 0; index < this.students.length; index++) {
+      const student = this.students[index];
+      this.filter.studentsId = student._id;
+      this.paymentsForStudentService.studentsPaymentsControllerFilterStudentPayments(student._id, this.filter).subscribe(
+        (paymentResponse: ListPaymentsForStudentResponse) => {
+          this.students[index].balance = this.amountService.getAmountInFormat(parseInt(paymentResponse.balance))
+         }
+      )
+    }
   }
 
   goToPage(page: number) {
@@ -161,4 +216,57 @@ export class CustomersListComponent implements OnInit {
     this.filter.offset = 0;
     this.refreshPage();
   }
+
+  assignCourse(student) {
+    this.modalRef = this.modalService.show(CourseAssignComponent, {
+      initialState: {
+        data: student
+      }
+    });
+    this.modalService.onHide
+      .subscribe(
+        () => {
+          this.getPaginatedStudents(this.filter);
+        }
+      );
+
+  }
+
+  assignInstructor(student) {
+    this.modalRef = this.modalService.show(InstructorAssignComponent, {
+      initialState: {
+        data: student
+      }
+    });
+    this.modalService.onHide
+      .subscribe(
+        () => {
+          this.getPaginatedStudents(this.filter);
+        }
+      );
+
+  }
+
+  addLesson(student) {
+    this.modalRef = this.modalService.show(LessonAddComponent, {
+      initialState: {
+        data: student
+      }
+    });
+    this.modalService.onHide
+      .subscribe(
+        () => {
+          this.getPaginatedStudents(this.filter);
+        }
+      );
+
+  }
+
+  getCategory(id) {
+    for (let index = 0; index < this.categories.length; index++){
+       if (this.categories[index]._id === id){
+         return this.categories[index].symbol
+       }
+   }
+  };
 }

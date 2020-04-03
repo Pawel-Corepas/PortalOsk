@@ -10,9 +10,11 @@
  * Do not edit the class manually.
  */import { Page } from './page';
 import { Students } from './students';
+import { Summary } from './summary';
 
 
 export interface StudentsListResponse { 
+    summary: Summary,
     data: Array<Students>;
     page: Page;
 }

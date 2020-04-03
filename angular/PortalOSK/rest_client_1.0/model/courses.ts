@@ -11,9 +11,12 @@
  */
 
 export interface Courses { 
-    id?: number;
+    _id?: string;
     name: string;
     startDate?: Date;
+    endDate?: Date;
     description?: string;
-    categoriesId?: number;
+    place:string
+    price: number,
+    categoriesId?: string;
 }

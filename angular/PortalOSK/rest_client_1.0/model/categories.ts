@@ -11,8 +11,7 @@
  */
 
 export interface Categories { 
-    id?: number;
+    _id?: number;
     symbol: string;
     description?: string;
-    instructorsId?: number;
 }

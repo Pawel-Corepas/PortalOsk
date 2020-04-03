@@ -34,7 +34,7 @@
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Imie i Nazwisko</th>
-                  <th scope="col">Kategoria</th>
+                  <th scope="col">Kursy</th>
 
                   <th scope="col">Telefon</th>
                   <th scope="col">Saldo</th>
@@ -62,9 +62,11 @@
                 <tr  *ngFor="let student of students" class="clickable">
                   <th scope="row">{{student.id}}</th>
                   <td>{{"  "+ student.name + " " + student.surname}}</td>
-                  <td>C+E</td>
+                  <td> <div *ngIf="student.courses.length>0">
+                    <div *ngFor="let course of student.courses"> <span *ngIf="course != null">{{course.name + ' (' + getCategory(course.categoriesId)+')'}}</span>  </div>
+                  </div></td>
                   <td>{{student.mobileNumber}}</td>
-                  <td class="text-warning" >{{student.balance}}</td>
+                  <td class="text-warning" >{{student.balance}} PLN</td>
                   <td>0</td>
                   <td>{{formatDate(student.theoryStartDate)}}</td>
                   <td>
@@ -79,10 +81,10 @@
                         <li role="menuitem"><a class="dropdown-item" (click)="showStudentDetails(student)">Profil
                             Kursanta</a></li>
                         <li role="menuitem"><a class="dropdown-item" (click)="registerPayment(student)">Dodaj Wpłate</a></li>
-                        <li role="menuitem"><a class="dropdown-item">Umów Jazde</a></li>
+                        <li role="menuitem"><a class="dropdown-item" (click)="addLesson(student)">Umów Jazde</a></li>
                         <li class="divider dropdown-divider"></li>
-                        <li role="menuitem"><a class="dropdown-item">Przypisz Kurs</a>
-                        <li role="menuitem"><a class="dropdown-item">Przypisz Instruktora</a>
+                        <li role="menuitem"><a class="dropdown-item" (click)="assignCourse(student)">Przypisz Kurs</a>
+                        <li role="menuitem"><a class="dropdown-item" (click)="assignInstructor(student)">Przypisz Instruktora</a>
                         </li>
                       </ul>
                     </div>

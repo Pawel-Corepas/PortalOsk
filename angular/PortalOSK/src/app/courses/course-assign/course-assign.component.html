@@ -1,0 +1,34 @@
+<div class="">
+    <div class="card-header p-3 bg-gradient-secondary text-white">
+        <h2 class="text-center">Dodaj Kursantów</h2>
+    </div>
+</div>
+
+<div class="card">
+
+    <div class="card-body table-responsive">
+        <table class="table table-hover">
+            <thead class="text-danger">
+                <tr>
+                    <th><i class="fas fa-chalkboard-teacher font-size-2 pt-1 "></i> Imię i Nazwisko</th>
+                    <th><i class="fas fa-chalkboard-teacher font-size-2 pt-1 "></i> Email</th>
+                    <th> <i class="far fa-calendar  p-2"></i> Telefon</th>
+                    <th> <i class="far fa-clock  p-2"></i> Saldo</th>
+                    <th>  </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let student of students, let i = index'>
+                    <td>{{student.name + '' + student.surname}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.mobileNumber}}</td>
+                    <td>{{student.balance}} </td>
+                    <td><a (click)="addToCourse(student._id, index)" class="btn btn-primary active" role="button">Zapisz</a>
+                        <!-- <a (click)="deleteFromCourse(student._id)" class="btn btn-primary active" role="button">Usuń</a>  -->
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

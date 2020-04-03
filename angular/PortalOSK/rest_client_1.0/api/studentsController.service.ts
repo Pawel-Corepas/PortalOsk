@@ -240,15 +240,15 @@ export class StudentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public studentsControllerFind(filter?: Filter6, observe?: 'body', reportProgress?: boolean): Observable<Array<Students>>;
-    public studentsControllerFind(filter?: Filter6, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Students>>>;
-    public studentsControllerFind(filter?: Filter6, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Students>>>;
-    public studentsControllerFind(filter?: Filter6, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public studentsControllerFind(courseId?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Students>>;
+    public studentsControllerFind(courseId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Students>>>;
+    public studentsControllerFind(courseId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Students>>>;
+    public studentsControllerFind(courseId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (filter !== undefined && filter !== null) {
-            queryParameters = queryParameters.set('filter', <any>filter);
+        if (courseId !== undefined && courseId !== null) {
+            queryParameters = queryParameters.set('courseId', courseId);
         }
 
         let headers = this.defaultHeaders;
@@ -326,10 +326,10 @@ export class StudentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public studentsControllerReplaceById(id: number, body?: Students, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public studentsControllerReplaceById(id: number, body?: Students, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public studentsControllerReplaceById(id: number, body?: Students, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public studentsControllerReplaceById(id: number, body?: Students, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public studentsControllerReplaceById(id: string, body?: Students, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public studentsControllerReplaceById(id: string, body?: Students, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public studentsControllerReplaceById(id: string, body?: Students, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public studentsControllerReplaceById(id: string, body?: Students, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling studentsControllerReplaceById.');

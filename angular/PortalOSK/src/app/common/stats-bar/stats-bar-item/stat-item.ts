@@ -1,5 +1,5 @@
 export class StatItem {
     name: string;
-    value: string;
+    value: number;
     class: string;
 }

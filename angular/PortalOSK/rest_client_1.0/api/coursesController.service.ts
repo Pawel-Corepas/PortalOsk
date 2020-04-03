@@ -25,6 +25,7 @@ import { NewCourses } from '../model/newCourses';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import { Page, FilterRequest } from 'rest_client_1.0';
 
 
 @Injectable()
@@ -194,16 +195,13 @@ export class CoursesControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public coursesControllerFind(filter?: Filter2, observe?: 'body', reportProgress?: boolean): Observable<Array<Courses>>;
-    public coursesControllerFind(filter?: Filter2, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Courses>>>;
-    public coursesControllerFind(filter?: Filter2, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Courses>>>;
-    public coursesControllerFind(filter?: Filter2, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public coursesControllerFind(body?: FilterRequest, observe?: 'body', reportProgress?: boolean): Observable<{ data:Array<Courses>,page:Page}>;
+    public coursesControllerFind(body?: FilterRequest, observe?: 'response', reportProgress?: boolean): Observable<{ data:Array<Courses>,page:Page}>;
+    public coursesControllerFind(body?: FilterRequest, observe?: 'events', reportProgress?: boolean): Observable<{ data:Array<Courses>,page:Page}>;
+    public coursesControllerFind(body?: FilterRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (filter !== undefined && filter !== null) {
-            queryParameters = queryParameters.set('filter', <any>filter);
-        }
+       
 
         let headers = this.defaultHeaders;
 
@@ -220,9 +218,11 @@ export class CoursesControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Courses>>(`${this.basePath}/courses`,
-            {
-                params: queryParameters,
+        return this.httpClient.post<{ data:Array<Courses>,page:Page}>(`${this.basePath}/courses/list`,
+            
+        body,
+        {
+               
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

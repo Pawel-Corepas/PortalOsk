@@ -14,4 +14,5 @@ export interface FilterRequest {
     limit?: number;
     offset?: number;
     queryString?: string;
+    studentsId?: string;
 }

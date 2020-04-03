@@ -68,10 +68,10 @@ export class StudentsPaymentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public studentsPaymentsControllerCreate(id: number, body?: NewPaymentsInStudents, observe?: 'body', reportProgress?: boolean): Observable<Payments>;
-    public studentsPaymentsControllerCreate(id: number, body?: NewPaymentsInStudents, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Payments>>;
-    public studentsPaymentsControllerCreate(id: number, body?: NewPaymentsInStudents, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Payments>>;
-    public studentsPaymentsControllerCreate(id: number, body?: NewPaymentsInStudents, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public studentsPaymentsControllerCreate(id: string, body?: NewPaymentsInStudents, observe?: 'body', reportProgress?: boolean): Observable<Payments>;
+    public studentsPaymentsControllerCreate(id: string, body?: NewPaymentsInStudents, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Payments>>;
+    public studentsPaymentsControllerCreate(id: string, body?: NewPaymentsInStudents, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Payments>>;
+    public studentsPaymentsControllerCreate(id: string, body?: NewPaymentsInStudents, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling studentsPaymentsControllerCreate.');
@@ -166,10 +166,10 @@ export class StudentsPaymentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public studentsPaymentsControllerFilterStudentPayments(id: number, body?: FilterRequest, observe?: 'body', reportProgress?: boolean): Observable<ListPaymentsForStudentResponse>;
-    public studentsPaymentsControllerFilterStudentPayments(id: number, body?: FilterRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ListPaymentsForStudentResponse>>;
-    public studentsPaymentsControllerFilterStudentPayments(id: number, body?: FilterRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ListPaymentsForStudentResponse>>;
-    public studentsPaymentsControllerFilterStudentPayments(id: number, body?: FilterRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public studentsPaymentsControllerFilterStudentPayments(id: string, body?: FilterRequest, observe?: 'body', reportProgress?: boolean): Observable<ListPaymentsForStudentResponse>;
+    public studentsPaymentsControllerFilterStudentPayments(id: string, body?: FilterRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ListPaymentsForStudentResponse>>;
+    public studentsPaymentsControllerFilterStudentPayments(id: string, body?: FilterRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ListPaymentsForStudentResponse>>;
+    public studentsPaymentsControllerFilterStudentPayments(id: string, body?: FilterRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling studentsPaymentsControllerFilterStudentPayments.');
@@ -196,7 +196,7 @@ export class StudentsPaymentsControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<ListPaymentsForStudentResponse>(`${this.basePath}/students/${encodeURIComponent(String(id))}/payments/list`,
+        return this.httpClient.post<ListPaymentsForStudentResponse>(`${this.basePath}/students/${encodeURIComponent(String(id))}/payments/sum`,
             body,
             {
                 withCredentials: this.configuration.withCredentials,

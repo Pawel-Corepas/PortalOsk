@@ -121,20 +121,16 @@
             </div>
         </div>
         <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="courseCategory">Kategoria Kursu</label>
-            <div>
-                <select id="courseCategory" class="form-control" formControlName="courseCategory"
-                    aria-describedby="courseCategoryHelpBlock" required="required">
-                    <option value=""> Wybierz Kategorie</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="C+E">C+E</option>
-                    <option value="D">D</option>
-                </select>
+            <div class="form-group col-md-6">
+                <label for="categoriesId">Kategoria Kursu</label>
+                <div>
+                    <select id="categoriesId" class="form-control" formControlName="categoriesId" 
+                        aria-describedby="courseCategoryHelpBlock" required="required">
+                        <option value=""> Wybierz Kategorie</option>
+                        <option *ngFor = "let category of categories" [value] ="category._id">{{category.symbol + " - " + category.description}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
         <div class="form-group col-md-4">
         </div>
         <div class="form-group col-md-4">

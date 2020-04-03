@@ -1,0 +1,122 @@
+<div class="">
+    <div class="card-header p-3 bg-gradient-secondary text-white">
+        <h2 class="text-center">Dodawanie Nowego Kursu</h2>
+    </div>
+</div>
+
+<div class="card">
+    <form [formGroup]="course" class="m-5">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nazwa</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <input id="name" formControlName="name" placeholder="Nazwa" type="text" required="required"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="courseCategory">Kategoria Kursu</label>
+                <div>
+                    <select id="categoriesId" class="form-control" formControlName="categoriesId" 
+                        aria-describedby="courseCategoryHelpBlock" required="required">
+                        <option value=""> Wybierz Kategorie</option>
+                        <option *ngFor = "let category of categories" [value] ="category._id">{{category.symbol + " - " + category.description}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="startDate">Data rozpoczęcia</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-phone"></i>
+                        </div>
+                    </div>
+                    <input id="startDate" formControlName="startDate" placeholder="Data Rozpoczęcia" type="date"
+                        class="form-control" required="required">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="endDate">Data zakończenia</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-at"></i>
+                        </div>
+                    </div>
+                    <input id="endDate" formControlName="endDate" placeholder="Data Zakończenia" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Cena kursu</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="fa fa-at"></i>
+                        </div>
+                    </div>
+                    <input id="price" formControlName="price" placeholder="Cena Kursu" type="string" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="description">Miejsce:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="place" formControlName="place" placeholder="Miejsce" type="text"
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Dodatkowy Informacje:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-address-card"></i>
+                            </div>
+                        </div>
+                        <input id="description" formControlName="description" placeholder="Dodatkowe Informacje" type="text"
+                            class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+        <div class="form-group col-md-3">
+
+        </div>
+        <div class="form-group col-md-4">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="individualCourse"></label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="individualCourse"
+                    id="individualCourse">
+                <label class="form-check-label" for="gridCheck">
+                    Dodaj kursantów w trakcie dodawania kursu
+                </label>
+            </div>
+        </div>
+        </div>
+        <div class="form-group float-right">
+            <button type="button" (click)="onCancel()" class="btn btn-outline-primary">Anuluj</button>
+            <button name="submit" type="button" (click)="onSubmit()" class="btn btn-primary mx-2">Dodaj
+                Kurs</button>
+
+        </div>
+    </form>
+</div>

@@ -13,8 +13,5 @@ import { Students } from './students';
 
 
 export interface ListPaymentsForStudentResponse { 
-    data?: Array<Students>;
-    page: Page;
-    totalPaid?: string;
-    totalDue?: string;
+    balance:string;
 }

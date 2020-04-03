@@ -62,14 +62,12 @@ export class CoursesCategoriesControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public coursesCategoriesControllerGetCategories(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Categories>>;
-    public coursesCategoriesControllerGetCategories(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Categories>>>;
-    public coursesCategoriesControllerGetCategories(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Categories>>>;
-    public coursesCategoriesControllerGetCategories(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public coursesCategoriesControllerGetCategories( observe?: 'body', reportProgress?: boolean): Observable<Array<Categories>>;
+    public coursesCategoriesControllerGetCategories( observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Categories>>>;
+    public coursesCategoriesControllerGetCategories( observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Categories>>>;
+    public coursesCategoriesControllerGetCategories( observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling coursesCategoriesControllerGetCategories.');
-        }
+        
 
         let headers = this.defaultHeaders;
 
@@ -86,7 +84,7 @@ export class CoursesCategoriesControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<Categories>>(`${this.basePath}/courses/${encodeURIComponent(String(id))}/categories`,
+        return this.httpClient.get<Array<Categories>>(`${this.basePath}/categories`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

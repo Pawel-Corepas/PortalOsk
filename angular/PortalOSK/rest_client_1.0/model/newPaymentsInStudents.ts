@@ -19,5 +19,5 @@ export interface NewPaymentsInStudents {
     description?: string;
     paidBy: string;
     paidTo: string;
-    studentsId?: number;
+    studentsId?: string;
 }

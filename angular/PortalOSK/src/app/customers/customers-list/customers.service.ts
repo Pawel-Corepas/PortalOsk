@@ -9,17 +9,17 @@ export class CustomersService {
     stats: StatItem[] = [
         {
             name: 'Kandydaci',
-            value: '25',
+            value: 25,
             class: 'fa fa-address-book stats-item-box'
         },
         {
             name: 'Kursansi na Kursie',
-            value: '44',
+            value: 44,
             class: 'fa fa-users stats-item-box'
         },
         {
             name: 'Ukończyli Kurs',
-            value: '1224',
+            value: 1224,
             class: 'fa fa-address-card stats-item-box'
         }
     ];

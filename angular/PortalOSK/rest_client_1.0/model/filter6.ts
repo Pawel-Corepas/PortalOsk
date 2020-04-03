@@ -18,6 +18,7 @@ export interface Filter6 {
     offset?: number;
     limit?: number;
     skip?: number;
+    courseId?: string;
     order?: Array<string>;
     include?: Array<CoursesInclude>;
 }

@@ -14,24 +14,5 @@
  * (Schema options: { title: 'NewStudentsInCourses', exclude: [ 'id' ], optional: [ 'coursesId' ] })
  */
 export interface NewStudentsInCourses { 
-    surname: string;
-    name: string;
-    personalIdentificationNumber?: string;
-    birthPlace?: string;
-    postalCode?: string;
-    town?: string;
-    street?: string;
-    buildingNumber?: string;
-    flatNumber?: string;
-    mobileNumber: string;
-    email: string;
-    courseCategory?: string;
-    theoryStartDate?: string;
-    practiceStartDate?: string;
-    internalExamDate?: string;
-    placeOfTraining?: boolean;
-    archived?: boolean;
-    stateRegulator?: string;
-    instructorsId?: number;
-    coursesId?: number;
+    studentId?: string;
 }

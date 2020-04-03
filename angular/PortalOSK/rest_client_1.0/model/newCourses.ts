@@ -17,5 +17,5 @@ export interface NewCourses {
     name: string;
     startDate?: Date;
     description?: string;
-    categoriesId?: number;
+    categoriesId?: string;
 }

@@ -10,9 +10,11 @@
  * Do not edit the class manually.
  */
 
+import { Courses } from './courses';
+
 export interface Students { 
     surname: string;
-    id?: number;
+    _id?: string;
     name: string;
     personalIdentificationNumber?: string;
     birthPlace?: string;
@@ -23,7 +25,7 @@ export interface Students {
     flatNumber?: string;
     mobileNumber: string;
     email: string;
-    courseCategory?: string;
+    categoriesId?: string;
     theoryStartDate?: string;
     practiceStartDate?: string;
     internalExamDate?: string;
@@ -31,6 +33,6 @@ export interface Students {
     archived?: boolean;
     stateRegulator?: string;
     instructorsId?: number;
-    coursesId?: number;
+    courses?: Array<Courses>;
     balance: string;
 }

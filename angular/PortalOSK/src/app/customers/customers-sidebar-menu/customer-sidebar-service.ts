@@ -91,7 +91,7 @@ export class CustomerSidebarService {
       icon: 'fa fa-chart-line',
       active: false,
       type: 'dropdown',
-      routerLink: '/',
+      routerLink: '/courses',
       submenus: [
         {
           title: 'Kat A',
