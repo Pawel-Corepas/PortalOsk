@@ -14,11 +14,5 @@
  * (Schema options: { title: 'NewInstructorsInCourses', exclude: [ 'id' ], optional: [ 'coursesId' ] })
  */
 export interface NewInstructorsInCourses { 
-    nick?: string;
-    email: string;
-    mobileNumber: string;
-    name: string;
-    surname: string;
-    instructorIdentifier: string;
-    coursesId?: number;
+    instructorsId?: string;
 }

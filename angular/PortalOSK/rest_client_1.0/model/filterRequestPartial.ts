@@ -17,4 +17,6 @@ export interface FilterRequestPartial {
     limit?: number;
     offset?: number;
     queryString?: string;
+    excludeCourses?: Array<string>;
+    excludeInstructors?: Array<string>;
 }

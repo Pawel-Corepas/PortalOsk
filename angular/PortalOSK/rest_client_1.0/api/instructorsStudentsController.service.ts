@@ -66,10 +66,10 @@ export class InstructorsStudentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public instructorsStudentsControllerCreate(id: number, body?: NewStudentsInInstructors, observe?: 'body', reportProgress?: boolean): Observable<Students>;
-    public instructorsStudentsControllerCreate(id: number, body?: NewStudentsInInstructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Students>>;
-    public instructorsStudentsControllerCreate(id: number, body?: NewStudentsInInstructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Students>>;
-    public instructorsStudentsControllerCreate(id: number, body?: NewStudentsInInstructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public instructorsStudentsControllerCreate(id: string, body?: NewStudentsInInstructors, observe?: 'body', reportProgress?: boolean): Observable<Students>;
+    public instructorsStudentsControllerCreate(id: string, body?: NewStudentsInInstructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Students>>;
+    public instructorsStudentsControllerCreate(id: string, body?: NewStudentsInInstructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Students>>;
+    public instructorsStudentsControllerCreate(id: string, body?: NewStudentsInInstructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling instructorsStudentsControllerCreate.');

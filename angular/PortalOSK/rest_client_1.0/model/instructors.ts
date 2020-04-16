@@ -10,13 +10,19 @@
  * Do not edit the class manually.
  */
 
+import { Categories } from './categories';
+import { Courses } from './courses';
+import { Students } from './models';
+
 export interface Instructors { 
-    id?: number;
+    _id: string;
     nick?: string;
     email: string;
     mobileNumber: string;
     name: string;
     surname: string;
-    instructorIdentifier: string;
-    coursesId?: number;
+    licenceIdentifier: string;
+    courses?: Array<Courses>;
+    categories: Array<Categories>;
+    students?: Array<Students>
 }

@@ -240,16 +240,11 @@ export class StudentsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public studentsControllerFind(courseId?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Students>>;
-    public studentsControllerFind(courseId?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Students>>>;
-    public studentsControllerFind(courseId?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Students>>>;
-    public studentsControllerFind(courseId?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public studentsControllerFind( observe?: 'body', reportProgress?: boolean): Observable<Array<Students>>;
+    public studentsControllerFind( observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Students>>>;
+    public studentsControllerFind( observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Students>>>;
+    public studentsControllerFind( observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (courseId !== undefined && courseId !== null) {
-            queryParameters = queryParameters.set('courseId', courseId);
-        }
 
         let headers = this.defaultHeaders;
 
@@ -268,7 +263,7 @@ export class StudentsControllerService {
 
         return this.httpClient.get<Array<Students>>(`${this.basePath}/students`,
             {
-                params: queryParameters,
+                
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

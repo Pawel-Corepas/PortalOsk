@@ -18,4 +18,5 @@ export interface Payments {
     paidBy: string;
     paidTo: string;
     studentsId?: string;
+    courseId?: string;
 }

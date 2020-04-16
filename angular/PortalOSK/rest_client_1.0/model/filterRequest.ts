@@ -15,4 +15,6 @@ export interface FilterRequest {
     offset?: number;
     queryString?: string;
     studentsId?: string;
+    excludeCourses?: Array<string>
+    excludeInstructors?: Array<string>;
 }

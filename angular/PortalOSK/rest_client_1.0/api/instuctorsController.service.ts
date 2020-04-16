@@ -110,10 +110,10 @@ export class InstuctorsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public instuctorsControllerCreate(body?: NewInstructors, observe?: 'body', reportProgress?: boolean): Observable<Instructors>;
-    public instuctorsControllerCreate(body?: NewInstructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Instructors>>;
-    public instuctorsControllerCreate(body?: NewInstructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Instructors>>;
-    public instuctorsControllerCreate(body?: NewInstructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public instuctorsControllerCreate(body?: Instructors, observe?: 'body', reportProgress?: boolean): Observable<Instructors>;
+    public instuctorsControllerCreate(body?: Instructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Instructors>>;
+    public instuctorsControllerCreate(body?: Instructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Instructors>>;
+    public instuctorsControllerCreate(body?: Instructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -280,10 +280,10 @@ export class InstuctorsControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public instuctorsControllerReplaceById(id: number, body?: Instructors, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public instuctorsControllerReplaceById(id: number, body?: Instructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public instuctorsControllerReplaceById(id: number, body?: Instructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public instuctorsControllerReplaceById(id: number, body?: Instructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public instuctorsControllerReplaceById(id: string, body?: Instructors, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public instuctorsControllerReplaceById(id: string, body?: Instructors, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public instuctorsControllerReplaceById(id: string, body?: Instructors, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public instuctorsControllerReplaceById(id: string, body?: Instructors, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling instuctorsControllerReplaceById.');
