@@ -70,7 +70,7 @@ export class CustomerSidebarService {
       icon: 'far fa-gem',
       active: false,
       type: 'dropdown',
-      routerLink: '/',
+      routerLink: '/employees/instructors',
       submenus: [
         {
           title: 'Lista',

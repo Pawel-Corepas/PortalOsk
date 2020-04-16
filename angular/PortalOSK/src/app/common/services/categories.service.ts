@@ -7,15 +7,15 @@ export class CategoriesService {
 categories: Categories[];
 
 constructor (private categoriesService: CategoriesControllerService){
-
-}
-getCategories(){
-    
     this.categoriesService.categoriesControllerFind().subscribe(
         (categories)=> {
             this.categories = categories
         }
     )
+}
+getCategories(){
+    
+    
     return this.categories
 }
 

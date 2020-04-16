@@ -1,6 +1,6 @@
 <div class="">
     <div class="card-header p-3 bg-gradient-secondary text-white">
-        <h2 class="text-center">Dodaj Kursantów</h2>
+        <h2 class="text-center">Przypisz Kursantów</h2>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
                     <td>{{student.email}}</td>
                     <td>{{student.mobileNumber}}</td>
                     <td>{{student.balance}} </td>
-                    <td><a (click)="addToCourse(student._id, index)" class="btn btn-primary active" role="button">Zapisz</a>
+                    <td><a (click)="addToInstructor(student._id, index)" class="btn btn-primary active" role="button">Przypisz</a>
                         <!-- <a (click)="deleteFromCourse(student._id)" class="btn btn-primary active" role="button">Usuń</a>  -->
                     </td>
                 </tr>

@@ -6,9 +6,10 @@ dateTo: Date;
 duration: number;
 description: string;
 createdBy: string;
-customerId: string;
-productId: string;
+studentId: string;
+courseId: string;
 calendarId: string;
+instructorId: string
 type: EventTypeEnum;
 used: boolean;
 }

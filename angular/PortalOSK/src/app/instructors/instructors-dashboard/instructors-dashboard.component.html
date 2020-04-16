@@ -3,11 +3,11 @@
       <nav aria-label="breadcrumb ">
         <ol class="breadcrumb  bg-transparent ">
           <li class="breadcrumb-item "><a class="text-warning font-size-2" href="#">Dashboard</a></li>
-          <li class="breadcrumb-item  text-warning active font-size-2 " aria-current="page">Kursy</li>
+          <li class="breadcrumb-item  text-warning active font-size-2 " aria-current="page">Instruktorzy</li>
         </ol>
       </nav>
       <div class="row">
-        <h4 class="pl-5 font-size-2-5">Kursy</h4>
+        <h4 class="pl-5 font-size-2-5">Instruktorzy</h4>
       </div>
   
     </div>
@@ -24,8 +24,8 @@
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" formControlName="searchString"
                     aria-label="Search">
                   <button class="btn btn-warning my-2 my-sm-0" (click)="Search()" type="button">Search</button>
-                  <button class="btn btn-primary mx-4 my-2 my-sm-0" (click)="addCourse()" type="button">Dodaj
-                    Kurs</button>
+                  <button class="btn btn-primary mx-4 my-2 my-sm-0" (click)="addInstructor()" type="button">Dodaj
+                    Instruktora</button>
                 </form>
               </div>
   
@@ -33,26 +33,42 @@
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Nazwa</th>
-                    <th scope="col">Kategoria</th>
+                    <th scope="col">Imie i Nazwisko</th>
+                    <th scope="col">Uprawnienia</th>
   
-                    <th scope="col">Data Rozpoczęcia</th>
-                    <th scope="col">Data Zakończenia</th>
-                    <th scope="col">Liczba Uczestników</th>
-                    <th scope="col">Cena</th>
+                    <th scope="col">Telefon</th>
+                    <th scope="col">Saldo</th>
+                    <th scope="col">Liczba Godzin</th>
+                    <th scope="col">Ostatnia Jazda</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
-
-                <tbody >
-                  <tr  *ngFor="let course of courses" class="clickable">
-                    <th scope="row">{{course.id}}</th>
-                    <td>{{course.name}}</td>
-                    <td>{{course.category.symbol}}</td>
-                    <td>{{formatDate(course.startDate)}}</td>
+                <!--             <tbody>
+                <tr *ngFor="let customer of customers">
+                  <th scope="row">{{customer.id}}</th>
+                  <td><img [src]="customer.avatarUri"
+                    class="rounded-circle img-thumbnail" style="width: 40px;">{{"  "+ customer.firstName + " " + customer.lastName}}</td>
+                  <td>C+E</td>
+                  <td>{{customer.mobileNumber}}</td>
+                  <td class="text-warning">{{customer.userAccountBalance + " PLN"}}</td>
+                  <td>{{customer.lessonsCount}}</td>
+                  <td>{{formatDate(customer.lastLessonDate)}}</td>
+                  <td><a name="" id="" class="btn btn-outline-secondary" href="#" role="button"><i class="fa fa-bars"
+                        aria-hidden="true"></i></a>
+                  </td>
+                </tr>
+              </tbody> -->
+                <tbody>
+                  <tr  *ngFor="let instructor of instructors" class="clickable">
+                    <th scope="row">{{instructor.id}}</th>
+                    <td>{{"  "+ instructor.name + " " + instructor.surname}}</td>
+                    <td> <div *ngIf="instructor.categories.length>0">
+                    <div *ngFor="let category of instructor.categories"> <span *ngIf="category != null">{{category.symbol + ' ( ' + category.description+' )'}}</span>  </div>
+                    </div></td>
+                    <td>{{instructor.mobileNumber}}</td>
                     <td class="text-warning" ></td>
-                    <td>{{course.students.length}}</td>
-                    <td>{{formatAmount(course.price)}}</td>
+                    <td>0</td>
+                    <td></td>
                     <td>
                       <!-- <a name="" id="" class="btn btn-outline-secondary" href="#" role="button"><i class="fa fa-bars"
                         aria-hidden="true"></i></a> -->
@@ -62,13 +78,13 @@
                           dropdownToggle role="button"><i class="fa fa-bars" aria-hidden="true"></i></a>
                         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
                           aria-labelledby="button-basic">
-                          <li role="menuitem"><a class="dropdown-item" (click)="showCourseDetails(course)">Karta
-                              Kursu</a></li>
-                          <li role="menuitem"><a class="dropdown-item" (click)="assignStudent(course)">Zapisz Kursanta</a></li>
-                          <li role="menuitem"><a class="dropdown-item" (click)="addLesson(course)">Dodaj Harmonogram</a></li>
+                          <li role="menuitem"><a class="dropdown-item" (click)="showInstructorDetails(instructor)">Profil
+                              Instruktora</a></li>
+                          <li role="menuitem"><a class="dropdown-item" (click)="registerPayment(instructor)">Przyjmij Wpłate</a></li>
+                          <li role="menuitem"><a class="dropdown-item" (click)="addLesson(instructor)">Umów Jazde</a></li>
                           <li class="divider dropdown-divider"></li>
-                          <li role="menuitem"><a class="dropdown-item" (click)="showCourseDetails(course)">Zakończ Kurs</a>
-                          
+                          <li role="menuitem"><a class="dropdown-item" (click)="assignCourse(instructor)">Przypisz Do Kursu</a>
+                          <li role="menuitem"><a class="dropdown-item" (click)="assignStudent(instructor)">Przypisz Do Kursanta</a>
                           </li>
                         </ul>
                       </div>
@@ -128,12 +144,13 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col-md-aut ">Nazwa</th>
+                      <th scope="col-md-aut ">Imie i Nazwisko</th>
                       <th scope="col-md-aut">Kategoria</th>
-                      <th scope="col-md-aut">Kursanci</th>
+                      <th scope="col-md-aut">Saldo</th>
                     </tr>
                   </thead>
   
+    
   
                 </table>
               </div>
@@ -141,19 +158,19 @@
             <div class="card-footer text-muted">
               <div class="row">
                 <div class="col-md-4 gb-dark">
-                  <p class="page-link text-light bg-dark">Rozmiar Strony</p>
+                  <p class="page-link text-light bg-dark">Items Per page</p>
                 </div>
                 <div class="col-md-4">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                           <li class="page-item disabled">
-                            <a class="page-link text-light bg-dark" href="#" tabindex="-1">Poprzednia</a>
+                            <a class="page-link text-light bg-dark" href="#" tabindex="-1">Previous</a>
                           </li>
                           <li class="page-item "><a class="page-link text-light bg-dark" href="#">1</a></li>
                           <li class="page-item"><a class="page-link text-light bg-dark" href="#">2</a></li>
                           <li class="page-item"><a class="page-link text-light bg-dark" href="#">3</a></li>
                           <li class="page-item">
-                            <a class="page-link text-light bg-dark" href="#">Następna</a>
+                            <a class="page-link text-light bg-dark" href="#">Next</a>
                           </li>
                         </ul>
                       </nav>

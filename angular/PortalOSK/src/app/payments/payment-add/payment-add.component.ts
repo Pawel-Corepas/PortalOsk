@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StudentsPaymentsControllerService, Payments, Students } from 'rest_client_1.0';
 import { AmountService } from 'src/app/common/services/amount.service';
+import { StudentsService } from 'src/app/customers/students.service';
 
 @Component({
   selector: 'app-payment-add',
@@ -15,7 +16,8 @@ export class PaymentAddComponent implements OnInit {
   @Input() data: Students;
   constructor(private bsModalRef: BsModalRef,
               private paymentsService: StudentsPaymentsControllerService,
-              private amountService : AmountService) { }
+              private amountService : AmountService,
+              private studentsInternalService: StudentsService  ) { }
 
   ngOnInit() {
     console.log(this.data);
@@ -24,6 +26,7 @@ export class PaymentAddComponent implements OnInit {
         amount: new FormControl('', [Validators.required]),
         description: new FormControl('', [Validators.required]),
         studentsId: new FormControl(this.data._id),
+        courseId: new FormControl(''),
         date:  new FormControl(new Date()),
         paidBy: new FormControl(this.data.name + ' ' + this.data.surname),
         paidTo: new FormControl('Grzegorz Biś')
@@ -41,7 +44,6 @@ export class PaymentAddComponent implements OnInit {
     const payments: Payments = this.payment.value;
     this.paymentsService.studentsPaymentsControllerCreate(this.data._id, payments).subscribe(
       (response) => {
-        console.log(response);
         this.bsModalRef.hide();
       }
     );

@@ -17,29 +17,38 @@
             <i class="far fa-clock m-1 p-2"></i> Godzina 14:00
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6">
 
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="amount">Kwota Wpłaty</label>
             <input type="string" id="amount" class="form-control mb-4 shadow" formControlName="amount"
                 placeholder="Kwota">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="paidTo">Przyjmujący Wpłatę</label>
             <input type="text" id="paidTo" class="form-control mb-4 shadow" formControlName="paidTo"
                 placeholder="Grzegorz Biś">
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="paidBy">Wpłacający</label>
             <input type="text" id="paidBy" class="form-control mb-4 shadow" formControlName="paidBy"
                 placeholder="'data.name'+' '+'data.surname'">
         </div>
-
-        <div class="form-group">
+        <div class="form-group col-md-6">
+            <label for="categoriesId">Kategoria Kursu</label>
+            <div>
+                <select id="courseId" class="form-control" formControlName="courseId" 
+                    aria-describedby="courseCategoryHelpBlock" required="required">
+                    <option value=""> Dotyczy Kursu</option>
+                    <option *ngFor = "let course of data.courses" [value] ="course._id">{{course.name + " - " + course.category.symbol}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
             <label for="description">Dodatkowe Informacje</label>
             <input type="text" id="description" class="form-control mb-4 shadow" formControlName="description"
                 placeholder="Dodatkowe Informacje">

@@ -3,22 +3,20 @@ import { CustomersService } from './customers.service';
 import { Customer } from '../customer';
 import * as moment from 'moment/moment';
 import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
-import { Students } from 'rest_client_1.0/model/students';
-import { StudentsControllerService, FilterRequest, StudentsPaymentsControllerService,
-         ListPaymentsForStudentResponse, 
+import { FilterRequest, 
          Categories,
-         CoursesControllerService} from 'rest_client_1.0';
+         Payments} from 'rest_client_1.0';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { CustomerAddComponent } from '../customer-add/customer-add.component';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PaymentAddComponent } from 'src/app/payments/payment-add/payment-add.component';
 import { CourseAssignComponent } from 'src/app/courses/course-assign/course-assign.component';
-import { InstructorAssignComponent } from 'src/app/instructors/instructor-assign/instructor-assign.component';
+import { InstructorAssignCourseComponent } from 'src/app/instructors/instructor-assign-course/instructor-assign-course.component';
 import { LessonAddComponent } from 'src/app/lessons/lesson-add/lesson-add.component';
-import { AmountService } from 'src/app/common/services/amount.service';
-import { CategoriesService } from 'src/app/common/services/categories.service';
-import { isArray } from 'util';
+import { AmountService } from 'src/app/common/services/amount.service';;
+import { StudentsService } from '../students.service';
+import { CustomersAssignCourseComponent } from '../customers-assign-course/customers-assign-course.component';
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -26,7 +24,7 @@ import { isArray } from 'util';
 })
 export class CustomersListComponent implements OnInit {
   customers: Customer[];
-  students: Students[];
+  students;
   categories: Categories[];
   stats: StatItem[];
   modalRef: BsModalRef;
@@ -42,62 +40,41 @@ export class CustomersListComponent implements OnInit {
 
   pages = [];
   constructor(private customersService: CustomersService,
-              private studentsService: StudentsControllerService,
-              private paymentsForStudentService: StudentsPaymentsControllerService,
-              private courseService: CoursesControllerService,
               private amountService: AmountService,
               private modalService: BsModalService,
-              private categoryService: CategoriesService) {
+              private studentsInternalService: StudentsService) {
                
   }
 
   ngOnInit() {
-   
+    
     this.customers = this.customersService.GetCustomers();
     this.stats = this.customersService.GetStats();
-
     this.search = new FormGroup(
       {
         searchString: new FormControl('')
       }
     );
-    this.refreshPage();
+    this.studentsInternalService.reloadStudents()
+    this.studentsInternalService.students.subscribe(
+      (students) => {
+        this.students = students
+        console.log(students)
+      }
+    )
   }
 
   refreshPage() {
-    this.pages = [];
-    this.studentsService.studentsControllerFilterStudents(this.filter).subscribe(
-      (response) => {
-        console.log(response.page);
-        this.total = response.page.total;
-        const pageCount = Math.round(response.page.total / this.filter.limit);
-        console.log(pageCount);
-        console.log(response.page.total % this.filter.limit);
-        if (response.page.total % this.filter.limit < 0 || response.page.total % this.filter.limit < this.filter.limit / 2) {
-          for (let index = 0; index < pageCount + 1; index++) {
-            this.pages.push(index + 1);
-          }
-        } else {
-          for (let index = 0; index < pageCount; index++) {
-            this.pages.push(index + 1);
-          }
-        }
-        this.students = response.data;
-        for (let index = 0; index < this.students.length; index++) {
-          const student = this.students[index];
-            this.getStudentCourseData(student, index)
-        }
+
+
+  
         
-        this.stats[0].value= response.summary.candidates,
-        this.stats[1].value= response.summary.customers,
-        this.stats[2].value= response.summary.archivedCustomers
-        this.getBalance();
-        this.categories = this.categoryService.getCategories();
-      }
-    );
+       // this.getBalance();
+       
+
   }
 
-  getCourseData(courseId,index, studentIndex){
+/*  getCourseData(courseId,index, studentIndex){
     console.log(courseId)
     this.courseService.coursesControllerFindById(courseId).subscribe(
       (course) =>{
@@ -106,8 +83,19 @@ export class CustomersListComponent implements OnInit {
       }
     )
    
-}
-  getStudentCourseData(student, studentIndex){
+}*/
+
+  sumPayments(payments: Payments[]){
+    var balance =0;
+
+    for (let index = 0; index < payments.length; index++) {
+      const paymentAmount = payments[index].amount;
+      balance=balance+paymentAmount
+    }
+
+    return this.amountService.getAmountInFormat(balance)
+  }
+ /* getStudentCourseData(student, studentIndex){
 
     for (let index = 0; index < student.courses.length; index++) {
       const course = student.courses[index];
@@ -117,24 +105,8 @@ export class CustomersListComponent implements OnInit {
         console.log(this.students)
       
   }
+*/
 
-
-
-
-  getPaginatedStudents(filter: FilterRequest) {
-    console.log(this.filter);
-    this.studentsService.studentsControllerFilterStudents(filter).subscribe(
-      (response) => {
-        this.students = response.data;
-        for (let index = 0; index < this.students.length; index++) {
-          const student = this.students[index];
-            this.getStudentCourseData(student, index)
-        }
-        
-        this.getBalance();
-      }
-    );
-  }
   formatDate(date: Date) {
     const newDateFormat = moment(date).format('L');
     return newDateFormat;
@@ -162,7 +134,7 @@ export class CustomersListComponent implements OnInit {
     this.modalService.onHide
       .subscribe(
         () => {
-          this.getPaginatedStudents(this.filter);
+         
         }
       );
 
@@ -176,12 +148,12 @@ export class CustomersListComponent implements OnInit {
     this.modalService.onHide
       .subscribe(
         () => {
-          this.getPaginatedStudents(this.filter);
+          this.studentsInternalService.reloadStudents()
         }
       );
   }
 
-  getBalance() {
+ /* getBalance() {
  
      for (let index = 0; index < this.students.length; index++) {
       const student = this.students[index];
@@ -192,7 +164,7 @@ export class CustomersListComponent implements OnInit {
          }
       )
     }
-  }
+  }*/
 
   goToPage(page: number) {
 
@@ -218,7 +190,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   assignCourse(student) {
-    this.modalRef = this.modalService.show(CourseAssignComponent, {
+    this.modalRef = this.modalService.show(CustomersAssignCourseComponent, {
       initialState: {
         data: student
       }
@@ -226,14 +198,14 @@ export class CustomersListComponent implements OnInit {
     this.modalService.onHide
       .subscribe(
         () => {
-          this.getPaginatedStudents(this.filter);
+         
         }
       );
 
   }
 
   assignInstructor(student) {
-    this.modalRef = this.modalService.show(InstructorAssignComponent, {
+    this.modalRef = this.modalService.show(InstructorAssignCourseComponent, {
       initialState: {
         data: student
       }
@@ -241,7 +213,7 @@ export class CustomersListComponent implements OnInit {
     this.modalService.onHide
       .subscribe(
         () => {
-          this.getPaginatedStudents(this.filter);
+          
         }
       );
 
@@ -256,17 +228,17 @@ export class CustomersListComponent implements OnInit {
     this.modalService.onHide
       .subscribe(
         () => {
-          this.getPaginatedStudents(this.filter);
+          
         }
       );
 
   }
 
-  getCategory(id) {
+/*  getCategory(id) {
     for (let index = 0; index < this.categories.length; index++){
        if (this.categories[index]._id === id){
          return this.categories[index].symbol
        }
    }
-  };
+  };*/
 }

@@ -27,7 +27,9 @@ export class CourseDashboardComponent implements OnInit {
     limit: 20,
     offset: 0,
     queryString: '',
-    studentsId: null
+    studentsId: null,
+    excludeCourses:[],
+    excludeInstructors:[]
   };
   total;
 

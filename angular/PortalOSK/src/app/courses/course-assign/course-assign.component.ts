@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Students, StudentsControllerService, CoursesStudentsControllerService, Courses } from 'rest_client_1.0';
+import { Students, StudentsControllerService, CoursesStudentsControllerService, Courses, FilterRequest } from 'rest_client_1.0';
 import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
@@ -10,9 +10,12 @@ import { BsModalRef } from 'ngx-bootstrap';
 export class CourseAssignComponent implements OnInit {
 
   students: Students[];
-  modalRef: BsModalRef;
   @Input() data: Courses;
-  
+  filter:FilterRequest = {
+    queryString: "",
+    excludeCourses: [],
+    excludeInstructors:[]
+  }
   constructor(
     private studentsService: StudentsControllerService,
     private studentCourseService: CoursesStudentsControllerService,
@@ -29,10 +32,10 @@ ngOnInit() {
 
 getStudents(){
 
-
-  this.studentsService.studentsControllerFind(this.data._id).subscribe(
+  this.filter.excludeCourses.push(this.data._id)
+  this.studentsService.studentsControllerFilterStudents(this.filter).subscribe(
     (students) => {
-      this.students = students;
+      this.students = students.data;
       console.log(students)
     }
   )
@@ -44,6 +47,7 @@ getStudents(){
       (res)=>{
         
         this.getStudents()
+        this.bsModalRef.hide()
       }
     )
 

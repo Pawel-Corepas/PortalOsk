@@ -35,7 +35,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './customers/customer-details/customer-details.component';
 import { PaymentsDashboardComponent } from './payments/payments-dashboard/payments-dashboard.component';
 import { PaymentAddComponent } from './payments/payment-add/payment-add.component';
-import { InstructorAssignComponent } from './instructors/instructor-assign/instructor-assign.component';
+import { InstructorAssignCourseComponent } from './instructors/instructor-assign-course/instructor-assign-course.component';
 import { InstructorAddComponent } from './instructors/instructor-add/instructor-add.component';
 import { CourseAddComponent } from './courses/course-add/course-add.component';
 import { CourseAssignComponent } from './courses/course-assign/course-assign.component';
@@ -45,6 +45,12 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
 import { AmountService } from './common/services/amount.service';
 import { CategoriesService } from './common/services/categories.service';
 import { StudentsService } from './customers/students.service';
+import { CoursesService } from './courses/courses.service';
+import { CustomersAssignCourseComponent } from './customers/customers-assign-course/customers-assign-course.component';
+import { InstructorsDashboardComponent } from './instructors/instructors-dashboard/instructors-dashboard.component';
+import { InstructorsService } from './instructors/instructors.service';
+import { InstructorDetailsComponent } from './instructors/instructor-details/instructor-details.component';
+import { InstructorAssignStudentsComponent } from './instructors/instructor-assign-students/instructor-assign-students.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -59,7 +65,8 @@ const appRoutes: Routes = [
   { path: 'org/calendar', component: OrgCalendarComponent },
   { path: 'customer/booking', component: OrgCalendarComponent },
   { path: 'customer/day/booking', component: CalendarDayComponent },
-  { path: 'customer/product/events', component: ProductEventsComponent }
+  { path: 'customer/product/events', component: ProductEventsComponent },
+  { path: 'employees/instructors', component: InstructorsDashboardComponent },
 ];
 export function init_app(appLoadService: CategoriesService) {
   console.log("app Initialized")
@@ -84,13 +91,17 @@ export function init_app(appLoadService: CategoriesService) {
     CustomerDetailsComponent,
     PaymentsDashboardComponent,
     PaymentAddComponent,
-    InstructorAssignComponent,
+    InstructorAssignCourseComponent,
     InstructorAddComponent,
     CourseAddComponent,
     CourseAssignComponent,
     LessonAddComponent,
     CourseDashboardComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    CustomersAssignCourseComponent,
+    InstructorsDashboardComponent,
+    InstructorDetailsComponent,
+    InstructorAssignStudentsComponent
   ],
   imports: [
     BrowserModule,
@@ -123,10 +134,13 @@ export function init_app(appLoadService: CategoriesService) {
     AmountService,
     CategoriesService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [CategoriesService], multi: true },
-    StudentsService
+    StudentsService,
+    CoursesService,
+    InstructorsService
   ],
   entryComponents: [OrgCalendarComponent, AddCalendarEventComponent, CustomerAddComponent, CustomerDetailsComponent,
-                    PaymentAddComponent,InstructorAssignComponent, CourseAssignComponent,CourseAddComponent, InstructorAddComponent,LessonAddComponent, CourseDetailsComponent],
+    PaymentAddComponent, InstructorAssignCourseComponent, InstructorAddComponent,InstructorDetailsComponent,InstructorAssignStudentsComponent,
+    CourseAssignComponent, CourseAddComponent, InstructorAddComponent, LessonAddComponent, CustomersAssignCourseComponent, CourseDetailsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

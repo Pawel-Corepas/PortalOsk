@@ -31,7 +31,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.productId === productId;
+                return event.courseId === productId;
             }
         );
 
@@ -43,7 +43,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.customerId === customerId;
+                return event.studentId === customerId;
             }
         );
 

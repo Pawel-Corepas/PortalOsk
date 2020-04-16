@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { StudentsControllerService, Students, Categories } from 'rest_client_1.0';
 import { defaultLocaleWeekdaysShort } from 'ngx-bootstrap/chronos/locale/locale.class';
 import { CategoriesService } from 'src/app/common/services/categories.service';
+import { StudentsService } from '../students.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -17,7 +18,8 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
 
   constructor(private bsModalRef: BsModalRef,
               private studentsService: StudentsControllerService,
-              private categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService,
+              private studentsInternalService: StudentsService) { }
 
   ngOnInit() {
       this.categories = this.categoriesService.getCategories();
@@ -60,13 +62,14 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
   }
   onEdit() {
     this.student.enable();
+
   }
   onSubmitEdit() {
     console.log('zapisuje zmiany');
     const students: Students = this.student.value;
     this.studentsService.studentsControllerReplaceById(this.data._id, students).subscribe(
       (response) => {
-        console.log(response);
+        this.studentsInternalService.reloadStudents()
         this.bsModalRef.hide();
       }
     );

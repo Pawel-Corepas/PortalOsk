@@ -37,8 +37,9 @@ export class AddCalendarEventComponent implements OnInit {
     this.data.createdBy = 'Paweł Skórniewski';
     this.data.description = 'Jazda do Piotrkowa';
     this.data.calendarId = this.calendarService.calendar.id;
-    this.data.customerId = this.customerService.customer.id;
-    this.data.productId = this.customerService.customer.products[0].id;
+    this.data.studentId = this.customerService.customer.id;
+    this.data.courseId = this.customerService.customer.products[0].id;
+    this.data.instructorId= "instr1";
     this.data.type = EventTypeEnum.practiceLesson;
     this.calendarService.bookEvent(this.data);
     this.productService.setProductEvents(this.data);

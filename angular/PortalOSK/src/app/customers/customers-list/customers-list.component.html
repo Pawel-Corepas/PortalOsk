@@ -63,10 +63,10 @@
                   <th scope="row">{{student.id}}</th>
                   <td>{{"  "+ student.name + " " + student.surname}}</td>
                   <td> <div *ngIf="student.courses.length>0">
-                    <div *ngFor="let course of student.courses"> <span *ngIf="course != null">{{course.name + ' (' + getCategory(course.categoriesId)+')'}}</span>  </div>
+                  <div *ngFor="let course of student.courses"> <span *ngIf="course != null">{{course.name + ' ( ' + course.category.symbol+' )'}}</span>  </div>
                   </div></td>
                   <td>{{student.mobileNumber}}</td>
-                  <td class="text-warning" >{{student.balance}} PLN</td>
+                  <td class="text-warning" >{{sumPayments(student.payments)}} PLN</td>
                   <td>0</td>
                   <td>{{formatDate(student.theoryStartDate)}}</td>
                   <td>
