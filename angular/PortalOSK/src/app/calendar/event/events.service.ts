@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CalendarEvent } from '../calendarEvent';
 import * as moment from 'moment/moment';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class EventsService {
     events: CalendarEvent[] = [];
 
+    constructor( private  httpClient:HttpClient) {
+        
+       
+        
+    }
+
+    setEvents(events){
+        this.events.push(events)
+    }
     addEvent(event: CalendarEvent) {
         this.events.push(event);
     }
@@ -19,7 +29,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.calendarId === calendarId;
+                return event.calendarId === "5e8cccc306c6fd1038c1ecfe";
             }
         );
 
@@ -31,7 +41,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.courseId === productId;
+                return event.courseId === "5e8cccc306c6fd1038c1ecfe";
             }
         );
 
@@ -43,7 +53,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.studentId === customerId;
+                return event.studentId === "5e8ccdc206c6fd1038c1ed06";
             }
         );
 
@@ -54,7 +64,7 @@ export class EventsService {
 
         const myevents: CalendarEvent[] = this.events.filter(
             (event: CalendarEvent) => {
-                return event.calendarId === calendarId
+                return event.calendarId === "5e8cccc306c6fd1038c1ecfe"
                     && moment(event.dateFrom).isSame(day, 'day');
             }
         );

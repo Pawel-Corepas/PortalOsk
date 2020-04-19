@@ -5,7 +5,10 @@ dateFrom: Date;
 dateTo: Date;
 duration: number;
 description: string;
-createdBy: string;
+createdBy: {
+    creatorType: string
+    creatorId: string
+};
 studentId: string;
 courseId: string;
 calendarId: string;

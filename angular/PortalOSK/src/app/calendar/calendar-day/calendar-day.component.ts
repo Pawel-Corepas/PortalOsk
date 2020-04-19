@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../org-calendar/calendar.service';
 import * as moment from 'moment/moment';
-import { Router } from '@angular/router';
+import { Router, RouteConfigLoadEnd } from '@angular/router';
 
 import { Day } from '../day';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -27,8 +27,14 @@ export class CalendarDayComponent implements OnInit {
     if (this.calendarService.getCurrentDay() === undefined) {
       return this.router.navigate(['customer/booking']);
     }
-    this.freeEvents = this.calendarService.getFreeEvents(
-      this.calendarService.day.date, this.calendarService.dayIndex, this.calendarService.weekIndex);
+   // this.freeEvents = this.calendarService.getFreeEvents(
+    //  this.calendarService.day.date, this.calendarService.dayIndex, this.calendarService.weekIndex);
+    this.freeEvents = this.calendarService.getFreeEventsImple(this.calendarService.getCurrentDay())
+    .filter(
+      (item) => {
+        return !item.used
+      }
+    )
   }
 
   formatDay() {
@@ -36,6 +42,8 @@ export class CalendarDayComponent implements OnInit {
     return moment(this.day.date).format('DD MMMM YYYY');
   }
   formatHour(event) {
+    console.info ("logging")
+    console.log(event)
     return moment(event.dateFrom).format('HH:mm');
   }
 

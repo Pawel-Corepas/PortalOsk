@@ -7,6 +7,8 @@ import { Day } from '../day';
 import { Week } from '../week';
 import { EventsService } from '../event/events.service';
 import { CalendarEvent } from '../calendarEvent';
+import { HttpClient } from '@angular/common/http';
+import { DraggableItemService } from 'ngx-bootstrap';
 @Component({
   selector: 'app-org-calendar',
   templateUrl: './org-calendar.component.html',
@@ -21,12 +23,21 @@ export class OrgCalendarComponent implements OnInit, AfterViewInit {
   progress = '0%';
   @ViewChild('testContent', {static: true}) testContent: ElementRef;
   constructor(private router: Router, private calendarService: CalendarService,
-              private eventsService: EventsService) { }
+              private eventsService: EventsService,
+              private http: HttpClient) { }
 
 
 
   ngOnInit() {
-   this.calendar = this.calendarService.getCalendar(new Date());
+    
+     this.http.get('http://localhost:3000/events').subscribe(
+       (calendar:CalendarMonth) => {
+         this.calendar = calendar;
+         this.calendarService.calendar = calendar;
+       }
+     )
+    
+  /* this.calendar = this.calendarService.getCalendar(new Date());
    // tslint:disable-next-line:prefer-for-of
    for (let i = 0; i < this.calendar.weeks.length; i++) {
      // tslint:disable-next-line:prefer-for-of
@@ -45,7 +56,7 @@ export class OrgCalendarComponent implements OnInit, AfterViewInit {
        }
      }
    }
-   console.log(this.testContent);
+   console.log(this.testContent);*/
   }
   ngAfterViewInit() {
     console.log();
@@ -73,6 +84,17 @@ export class OrgCalendarComponent implements OnInit, AfterViewInit {
       this.calendar.weeks[weekIndex].days[dayIndex].date, dayIndex, weekIndex).length;
     this.calendar = this.calendarService.calendar;
     return this.calendar.weeks[weekIndex].days[dayIndex].freeEventsCount;
+  }
+
+  getFreeEvents(day:Day) {
+    
+    let events= this.calendarService.getFreeEventsImple(day)
+    .filter(
+      (item) => {
+        return !item.used
+      }
+    )
+    return events.length
   }
   getProgress(date) {
     this.bookedHours  = this.eventsService.getEventsByCalendarIdAndDay(this.calendarService.calendar.id, date).length;

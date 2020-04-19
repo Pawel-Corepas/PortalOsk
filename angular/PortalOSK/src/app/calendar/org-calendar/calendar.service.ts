@@ -20,13 +20,17 @@ export class CalendarService {
     workingHours: WorkingHours = new WorkingHours();
     dayIndex;
     weekIndex;
-    eventsInIntervalCount;
+    dayMinutes = 60 * 12;
+    eventInterval = 60;
+    eventsInIntervalCount= this.dayMinutes / this.eventInterval
     currentEvent: CalendarEvent  = new CalendarEvent ();
     constructor(private eventsService: EventsService) {
 
     }
 
-    getCalendar(date: Date) {
+     getCalendar(date: Date) {
+      
+
         if (this.calendar === undefined) {
             this.calendar = new CalendarMonth ();
             moment.locale('pl');
@@ -36,7 +40,7 @@ export class CalendarService {
             this.calendar.numberOfDays = moment(date).daysInMonth();
             this.calendar.weeks = this.getWeeks(date);
         }
-        console.log(this.calendar);
+        console.log(JSON.stringify(this.calendar));
         return this.calendar;
     }
 
@@ -94,7 +98,9 @@ export class CalendarService {
     }
 
     getCurrentDay() {
+        console.log(this.day)
         return this.day;
+        
     }
 
     setWeek(week: Week, index ) {
@@ -104,6 +110,12 @@ export class CalendarService {
 
     getCurrentWeek() {
         return this.week;
+    }
+
+    getFreeEventsImple(day:Day){
+       console.info("loading day")
+        console.log(day)
+        return day.intervals
     }
 
     getFreeEvents(day: Date, dayIndex, weekIndex) {
@@ -137,6 +149,7 @@ export class CalendarService {
         return true;
     }
     bookEvent(event: CalendarEvent) {
+        console.log (JSON.stringify(event))
         this.calendar.weeks[this.weekIndex].days[this.dayIndex].events.push(event);
 
     }
