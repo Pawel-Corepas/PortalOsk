@@ -11,6 +11,7 @@
  */
 
 import { Courses } from './courses';
+import { Instructors } from './instructors';
 
 export interface Students { 
     surname: string;
@@ -32,7 +33,7 @@ export interface Students {
     placeOfTraining?: boolean;
     archived?: boolean;
     stateRegulator?: string;
-    instructorsId?: number;
+    instructors?: Array<Instructors>;
     courses?: Array<Courses>;
     balance: string;
 }
