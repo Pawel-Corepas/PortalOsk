@@ -17,6 +17,11 @@ import { LessonAddComponent } from 'src/app/lessons/lesson-add/lesson-add.compon
 import { AmountService } from 'src/app/common/services/amount.service';;
 import { StudentsService } from '../students.service';
 import { CustomersAssignCourseComponent } from '../customers-assign-course/customers-assign-course.component';
+import { OrgCalendarComponent } from 'src/app/calendar/org-calendar/org-calendar.component';
+import { CalendarService } from 'src/app/calendar/org-calendar/calendar.service';
+import { Router } from '@angular/router';
+import { CalendarDayComponent } from 'src/app/calendar/calendar-day/calendar-day.component';
+import { AddCalendarEventComponent } from 'src/app/calendar/event/add-calendar-event/add-calendar-event.component';
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -27,7 +32,9 @@ export class CustomersListComponent implements OnInit {
   students;
   categories: Categories[];
   stats: StatItem[];
-  modalRef: BsModalRef;
+  calModal: BsModalRef;
+  eventModal:BsModalRef;
+  addEventModal:BsModalRef;
   search: FormGroup;
   pageSizes: number[] = [10, 20, 50, 100];
   filter: FilterRequest = {
@@ -42,7 +49,9 @@ export class CustomersListComponent implements OnInit {
   constructor(private customersService: CustomersService,
               private amountService: AmountService,
               private modalService: BsModalService,
-              private studentsInternalService: StudentsService) {
+              private studentsInternalService: StudentsService,
+              private calendarService: CalendarService,
+              private router: Router) {
                
   }
 
@@ -113,7 +122,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   addCustomer() {
-    this.modalRef = this.modalService.show(CustomerAddComponent, {
+    this.calModal = this.modalService.show(CustomerAddComponent, {
       initialState: {
         data: event
       }
@@ -126,7 +135,7 @@ export class CustomersListComponent implements OnInit {
       );
   }
   showStudentDetails(student) {
-    this.modalRef = this.modalService.show(CustomerDetailsComponent, {
+    this.calModal = this.modalService.show(CustomerDetailsComponent, {
       initialState: {
         data: student
       }
@@ -140,7 +149,7 @@ export class CustomersListComponent implements OnInit {
 
   }
   registerPayment(student) {
-    this.modalRef = this.modalService.show(PaymentAddComponent, {
+    this.calModal = this.modalService.show(PaymentAddComponent, {
       initialState: {
         data: student
       }
@@ -190,7 +199,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   assignCourse(student) {
-    this.modalRef = this.modalService.show(CustomersAssignCourseComponent, {
+    this.calModal = this.modalService.show(CustomersAssignCourseComponent, {
       initialState: {
         data: student
       }
@@ -205,7 +214,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   assignInstructor(student) {
-    this.modalRef = this.modalService.show(InstructorAssignCourseComponent, {
+    this.calModal = this.modalService.show(InstructorAssignCourseComponent, {
       initialState: {
         data: student
       }
@@ -220,18 +229,8 @@ export class CustomersListComponent implements OnInit {
   }
 
   addLesson(student) {
-    this.modalRef = this.modalService.show(LessonAddComponent, {
-      initialState: {
-        data: student
-      }
-    });
-    this.modalService.onHide
-      .subscribe(
-        () => {
-          
-        }
-      );
-
+    this.calendarService.setStudent(student)
+    this.router.navigate(['org/calendar'])
   }
 
 /*  getCategory(id) {

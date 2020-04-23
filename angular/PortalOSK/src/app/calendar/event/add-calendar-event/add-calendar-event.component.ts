@@ -31,8 +31,10 @@ export class AddCalendarEventComponent implements OnInit {
   }
 
   formatDate() {
-    return moment(this.data.dateFrom).format( 'DD MMMM YYYY') + ', godzina:' +
-    moment(this.data.dateFrom).format( 'HH:mm') + ', czas jazdy: ' + this.data.duration + 'h';
+    return moment(this.data.dateFrom).format( 'DD MMMM YYYY') 
+  }
+  formatHour(){
+    return 'Godzina:' + moment(this.data.dateFrom).format( 'HH:mm') ;
   }
   book() {
    
@@ -42,9 +44,9 @@ export class AddCalendarEventComponent implements OnInit {
     };
     this.data.description = 'Jazda do Piotrkowa';
     this.data.calendarId = "5e8cccc306c6fd1038c1ecfe";
-    this.data.studentId = "5e8ccdc206c6fd1038c1ed06";
+    this.data.studentId = this.calendarService.getStudent()._id;
     this.data.courseId = "5e8cccc306c6fd1038c1ecfe";
-    this.data.instructorId= "5e9475ed8c449829c090dabd";
+    this.data.instructorId= this.calendarService.getInstructor()._id;
     this.data.duration = 1;
     this.data.type = EventTypeEnum.practiceLesson;
     this.http.post('http://localhost:3000/events',this.data).subscribe(
@@ -53,7 +55,6 @@ export class AddCalendarEventComponent implements OnInit {
         this.productService.setProductEvents(this.data);
         this.eventsService.addEvent(this.data);
         this.bsModalRef.hide();
-        this.router.navigate(['customer/dashboard']);
       }
     )
 

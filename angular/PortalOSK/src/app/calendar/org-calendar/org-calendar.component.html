@@ -1,21 +1,45 @@
-<button type="button" (click)="backToCustomerDashboard()" class="btn btn-outline-primary m-2 position-absolute"> <i
+<button type="button" *ngIf="!student" (click)="backToCustomerDashboard()" class="btn btn-outline-primary m-2 position-absolute"> <i
   class="fa fa-arrow-left font-size-3 text-dark" aria-hidden="true"></i></button>
 <div class="d-flex justify-content-center">
- 
   <div class="container m-1 calendar-popup bg-gradient-secondary text-white">
     <div class="row">
       <div class="col">
-        <h2 class="m-2">Kalendarz - Grzegorz Biś</h2>
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem>Action - 1</button>
+            <button ngbDropdownItem>Another Action</button>
+            <button ngbDropdownItem>Something else is here</button>
+          </div>
+        </div>
       </div>
-      <div class="col text-right">
-        <h2 class="m-2"> Sierpień 2019</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h2 *ngIf="!selectedInstructor" class="m-2">Kalendarz: Wszyscy Inktruktorzy</h2>
+        <h2  *ngIf="selectedInstructor"class="m-2">{{'Kalendarz: ' + selectedInstructor.name +' '+ selectedInstructor.surname}}</h2>
+      </div>
+      <div class="col-md-3">
+          <form [formGroup]="instructors" class="m-2">
+          <select id="instructor" (change)="setSelectedInstructor($event)" class="form-control" formControlName="instructor"
+              aria-describedby="courseCategoryHelpBlock" required="required">
+              <option *ngFor = "let instructor of instructorsList, let i = index" 
+              [value] ="i"
+              
+              >{{instructor.name + " " + instructor.surname}}</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="col-md-3 text-right">
+        <h4 class="m-2"> {{today}} </h4>
       </div>
     </div>
 
     <hr class="mx-2">
     <div class="container mx-2">
       <div class="row">
-        <table class="table table-hover table-inverse ">
+        <table class="table table-cal-heading table-hover table-inverse ">
           <thead class="thead-inverse">
             <tr class="text-white">
               <th class="cal-grid-heading">Pon</th>
@@ -36,15 +60,21 @@
                   <div class="col">{{getDayInMonth(day.date)}}</div>
                   <div class="col text-right"><i class="fa fa-plus" aria-hidden="true"></i></div>
                 </div>
-                <div class="progress bg-success my-3" style="max-width: 120px;">
+                
+                <div class="lesson-hover-base progress bg-success my-3" style="max-width: 120px;">
                     <div id="testContent" class="d-flex flex-row" style="width: 100%;">
-                        <div  *ngFor=" let interval of day.intervals ; let z = index"  [ngStyle]="{'width': getWidth(),'border-right':'solid 0.2px rgba(54, 2, 27, 0.1)'}" [ngClass]="{'used': interval.used}" 
-                        ngbPopover="You see, I show up on hover!" triggers="mouseenter:mouseleave" popoverTitle="Pop title"></div>
+                        <div  *ngFor=" let interval of day.intervals ; let z = index" 
+                         [ngStyle]="{'width': getWidth(),'border-right':'solid 0.2px rgba(54, 2, 27, 0.1)'}" [ngClass]="{'used': interval.used}" 
+                       >
+                      
                       </div>
+                      </div>
+                     
                   <!-- <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width': getProgress(day.date)}" aria-valuenow="10"
                     aria-valuemin="0" aria-valuemax="100"></div> -->
                 </div>
                 <p  class="card-text"><small class="text-white">{{'Wolne godziny: ' + getFreeEvents(day) }}</small></p>
+                
               </td>
             </tr>
           </tbody>

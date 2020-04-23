@@ -135,6 +135,7 @@ body {
   height: 5rem;
   width: 8rem;
   font-size: 1.2rem;
+  position: relative;
 
   &:hover{
     background-color: $dark;
@@ -145,8 +146,15 @@ body {
 .cal-grid-heading{
  min-height: 5rem;
  text-align: center;  
+ padding: 0 !important;
 }
 
+
+.lesson-hover{
+  top: -5rem;
+
+  left: 0.5rem;
+}
 .free-hour{
   min-width:8rem;
   cursor: pointer;

@@ -19,12 +19,13 @@
         
         <div class="">
             <div class="">
-                <h4 class="m-1 p-2"><i class="far fa-person m-1 p-2"></i>Instruktor: Grzegorz Biś</h4>
+                <h4 class="m-1 p-2"><i class="far fa-person m-1 p-2"></i>
+                    {{'Instruktor: '+ calendarService.getInstructor().name +' '+ calendarService.getInstructor().surname}}</h4>
             </div>
         </div>
         <div class="">
-            <i class="far fa-calendar-alt m-1 p-2"></i>3 Sierpnia 2018 <br>
-            <i class="far fa-clock m-1 p-2"></i> Godzina 14:00
+            <i class="far fa-calendar-alt m-1 p-2"></i>{{formatDate()}} <br>
+            <i class="far fa-clock m-1 p-2"></i> {{formatHour()}}
         </div>
 
         <div class="">

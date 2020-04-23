@@ -15,6 +15,7 @@ import { CalendarEvent } from '../calendarEvent';
 })
 export class CalendarDayComponent implements OnInit {
   freeEvents: CalendarEvent[];
+  usedEvents: CalendarEvent[]
   day: Day;
   modalRef: BsModalRef;
   constructor(private calendarService: CalendarService,
@@ -35,6 +36,14 @@ export class CalendarDayComponent implements OnInit {
         return !item.used
       }
     )
+    this.usedEvents = this.calendarService.getFreeEventsImple(this.calendarService.getCurrentDay())
+    .filter(
+      (item) => {
+      
+        return item.used
+      }
+    )
+    console.log(this.usedEvents)
   }
 
   formatDay() {
@@ -42,10 +51,13 @@ export class CalendarDayComponent implements OnInit {
     return moment(this.day.date).format('DD MMMM YYYY');
   }
   formatHour(event) {
-    console.info ("logging")
-    console.log(event)
     return moment(event.dateFrom).format('HH:mm');
   }
+
+  formatEventDateTime(event){
+    return moment(event.dateFrom).format( 'DD MMMM YYYY') + ', godzina:' +
+    moment(event.dateFrom).format( 'HH:mm') ;
+  }  
 
   backToMonthView() {
     this.router.navigate(['customer/booking']);
@@ -58,7 +70,12 @@ export class CalendarDayComponent implements OnInit {
         data: event
       },
       class: 'w700'
-    });
+    })
+    this.modalService.onHide.subscribe(
+      ()=>{
+        this.router.navigate(['customer/booking'])
+      }
+    )
   }
 
 }

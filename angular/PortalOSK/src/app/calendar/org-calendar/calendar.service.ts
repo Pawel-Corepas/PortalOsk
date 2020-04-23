@@ -9,11 +9,14 @@ import { WorkingHours } from '../working-hours';
 import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
 import { CalendarEvent } from '../calendarEvent';
 import { EventsService } from '../event/events.service';
+import { Students, Instructors } from 'rest_client_1.0';
 
 @Injectable()
 export class CalendarService {
 
     calendarMoment = moment(new Date());
+    student: Students;
+    instructor: Instructors;
     calendar: CalendarMonth;
     day: Day;
     week: Week;
@@ -98,7 +101,6 @@ export class CalendarService {
     }
 
     getCurrentDay() {
-        console.log(this.day)
         return this.day;
         
     }
@@ -113,8 +115,7 @@ export class CalendarService {
     }
 
     getFreeEventsImple(day:Day){
-       console.info("loading day")
-        console.log(day)
+
         return day.intervals
     }
 
@@ -153,8 +154,19 @@ export class CalendarService {
         this.calendar.weeks[this.weekIndex].days[this.dayIndex].events.push(event);
 
     }
+    getStudent(){
+        return this.student
+    }
 
-   /* getBookedEvents(dayIndex, weekIndex) {
-        return this.calendar.weeks[weekIndex].days[dayIndex].events;
-    }*/
+    setStudent(student:Students){
+        this.student = student;
+    }
+
+    getInstructor(){
+        return this.instructor
+    }
+
+    setInstructor(instructor:Instructors){
+        this.instructor = instructor;
+    }
 }
