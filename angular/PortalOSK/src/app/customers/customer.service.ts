@@ -7,6 +7,7 @@ import { Students } from 'rest_client_1.0/model/students';
 
 @Injectable ()
 export class CustomerService {
+    student:Students;
     customer: Customer;
 
     constructor( private productService: ProductService, private customersService: CustomersService) {
@@ -21,6 +22,14 @@ export class CustomerService {
 
     getCustomerProducts() {
     return this.customer.products;
+    }
+
+    setStudent(student:Students){
+        this.student=student;
+    }
+
+    getStudent(){
+        return this.student
     }
 
 }

@@ -3,10 +3,7 @@ import { CalendarMonth } from '../calendar-month';
 import * as moment from 'moment/moment';
 import { Week } from '../week';
 import { Day } from '../day';
-import { getDay } from 'ngx-bootstrap';
 import { WorkingHours } from '../working-hours';
-
-import { diff, addedDiff, deletedDiff, updatedDiff, detailedDiff } from 'deep-object-diff';
 import { CalendarEvent } from '../calendarEvent';
 import { EventsService } from '../event/events.service';
 import { Students, Instructors } from 'rest_client_1.0';

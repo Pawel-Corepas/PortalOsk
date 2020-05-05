@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarService } from './calendar.service';
 import { CalendarMonth } from '../calendar-month';
@@ -10,6 +10,7 @@ import { CalendarEvent } from '../calendarEvent';
 import { HttpClient } from '@angular/common/http';
 import { Students, Instructors, InstuctorsControllerService } from 'rest_client_1.0';
 import { FormGroup, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-org-calendar',
   templateUrl: './org-calendar.component.html',
@@ -78,8 +79,6 @@ export class OrgCalendarComponent implements OnInit {
   }
 
   getCalendar(){
-    
-
     if(this.selectedInstructor){
       
       this.eventsUrl = 'http://localhost:3000/events?instructorId='+this.selectedInstructor._id;
@@ -115,10 +114,14 @@ export class OrgCalendarComponent implements OnInit {
   }
 
   viewDay(day: Day, dayIndex, week: Week, weekIndex) {
+    if(this.calendarService.getInstructor()){
+      this.calendarService.setDay(day, dayIndex);
+      this.calendarService.setWeek(week, weekIndex);
+      this.router.navigate(['customer/day/booking'])
+    } else {
+      alert("wybierz studenta")
+    }
 
-    this.calendarService.setDay(day, dayIndex);
-    this.calendarService.setWeek(week, weekIndex);
-    this.router.navigate(['customer/day/booking'])
   }
   getFreeDays(dayIndex, weekIndex) {
     this.calendar.weeks[weekIndex].days[dayIndex].freeEventsCount = this.calendarService.getFreeEvents(

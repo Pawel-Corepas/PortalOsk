@@ -19,9 +19,8 @@ export class ProductCardComponent implements OnInit {
                private calendarService: CalendarService) {}
 
   ngOnInit() {
-    this.calendar = this.calendarService.calendar;
-    this.currentEvent = this.calendar.weeks[this.calendarService.weekIndex].
-    days[this.calendarService.dayIndex].events[0];
+    this.calendar = this.calendarService.getCalendar(new Date());
+    this.currentEvent = null;
   }
 
   getNextBookingDate() {

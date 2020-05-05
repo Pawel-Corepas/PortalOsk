@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StudentsPaymentsControllerService, Payments, Students } from 'rest_client_1.0';
 import { AmountService } from 'src/app/common/services/amount.service';

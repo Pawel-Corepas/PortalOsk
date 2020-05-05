@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CoursesControllerService, Categories, Courses } from 'rest_client_1.0';
 import { AmountService } from 'src/app/common/services/amount.service';
 import { CategoriesService } from 'src/app/common/services/categories.service';

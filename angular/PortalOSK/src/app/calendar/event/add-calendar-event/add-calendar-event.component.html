@@ -1,21 +1,11 @@
-<!--    <div class="card-header shadow p-3 bg-gradient-secondary text-white">
-        <h2 class="text-center">Rezerwacja Jazdy</h2>
-    </div>
-    <div class="card-body">
-        <h4 class="card-title">{{formatDate()}}</h4>
-        <p class="card-text">Instruktor: Grzegorz Biś</p>
-    </div>
-    <div class="card-footer text-muted text-right">
-        <button type="button" class="btn btn-danger" btn-lg btn-block> Rezerwuj</button>
-    </div>
-</div> -->
+
 <div class="card w700">
         <div class="">
                 <div class="card-header shadow p-3 bg-gradient-secondary text-white">
                     <h2 class="text-center">Rezerwacja Jazdy</h2>
                 </div>
             </div>
-    <form class="border border-light p-5">
+    <form [formGroup]="lesson"  class="border border-light p-5">
         
         <div class="">
             <div class="">
@@ -33,30 +23,38 @@
                 <a href="" target="_blank">Regulamin Rezerwacji Jazd</a>
             </p>
         </div>
+        <div *ngIf="!this.calendarService.getStudent()" class="form-group">
+            <label for="student">Kursant</label>
+            <select id="student"  class="form-control" formControlName="student"
+            aria-describedby="courseCategoryHelpBlock" required="required">
+            <option *ngFor = "let theStudent of instructorStudents, let i = index" 
+            [value] ="i" >{{theStudent.name + " " + theStudent.surname}}</option>
+        </select>
+        </div>
         <div class="form-group ">
-                <label for="exampleFormControlSelect2">Długość Zajęć:</label>
-                <select class="form-control mb-4 initialized shadow" id="exampleFormControlSelect2">
-                  <option>Wybierz długość zajęć</option>
-                  <option>1 Godzina</option>
-                  <option>2 Godziny</option>
-                  <option>3 Godziny</option>
-                  <option>Jazda łączona, 2 Godziny</option>
+                <label for="duration">Długość Zajęć:</label>
+                <select class="form-control mb-4 initialized shadow" id="duration" formControlName="duration">
+                  <option value=''>Wybierz długość zajęć</option>
+                  <option value ="1">1 Godzina</option>
+                  <option value ="2">2 Godziny</option>
+                  <option value ="3">3 Godziny</option>
+                  <option value ="2">Jazda łączona, 2 Godziny</option>
                 </select>
               </div>
 
 <div class="">
-        <label for="additionalInfo">Dodatkowe Informacje:</label>
-    <input type="text" id="additionalInfo" class="form-control mb-4 shadow" placeholder="Dodatkowe Informacje">
+        <label for="description">Dodatkowe Informacje:</label>
+    <input type="text" id="description" class="form-control mb-4 shadow" placeholder="Dodatkowe Informacje" formControlName="description">
 </div>
 
             <div class="form-group ">
                     <label for="exampleFormControlSelect2">Miejsce spotkania z Instruktorem:</label>
-                    <select class="form-control mb-4 initialized shadow" id="exampleFormControlSelect1">
-                      <option>Wybierz miejsce spotkania z instruktorem</option>
-                      <option>Siedziba Ośrodka, Ul Kościuszki 65, Radomsko</option>
-                      <option>Plac Manewrowy, Ul Zmyślona 87, Radomsko</option>
-                      <option>Pod Kościołem Sw Anny, Kietlin</option>
-                      <option>Przyjeź po mnie</option>
+                    <select class="form-control mb-4 initialized shadow" id="place" formControlName="place">place
+                      <option value=''>Wybierz miejsce spotkania z instruktorem</option>
+                      <option value ="Siedziba Ośrodka, Ul Kościuszki 65, Radomsko">Siedziba Ośrodka, Ul Kościuszki 65, Radomsko</option>
+                      <option value ="Plac Manewrowy, Ul Zmyślona 87, Radomsko">Plac Manewrowy, Ul Zmyślona 87, Radomsko</option>
+                      <option value ="Pod Kościołem Sw Anny, Kietlin">Pod Kościołem Sw Anny, Kietlin</option>
+                      <option value ="Przyjeź po mnie">Przyjeź po mnie</option>
                     </select>
                   </div>
 

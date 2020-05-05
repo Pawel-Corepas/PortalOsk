@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { StudentsControllerService, Students, Categories } from 'rest_client_1.0';
-import { defaultLocaleWeekdaysShort } from 'ngx-bootstrap/chronos/locale/locale.class';
 import { CategoriesService } from 'src/app/common/services/categories.service';
 import { StudentsService } from '../students.service';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -19,10 +19,14 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
   constructor(private bsModalRef: BsModalRef,
               private studentsService: StudentsControllerService,
               private categoriesService: CategoriesService,
+              private customerService: CustomerService,
               private studentsInternalService: StudentsService) { }
 
   ngOnInit() {
       this.categories = this.categoriesService.getCategories();
+      if(!this.data){
+        this.data=this.customerService.getStudent()
+      }
        this.student = new FormGroup (
       {
         name: new FormControl(this.data.name , [ Validators.required]),
@@ -55,7 +59,7 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
 
   onCancel() {
     console.log('used');
-    this.bsModalRef.hide();
+   this.bsModalRef.hide();
   }
   onCancelEdit() {
     this.student.disable();
@@ -70,7 +74,7 @@ export class CustomerDetailsComponent implements OnInit, AfterContentInit {
     this.studentsService.studentsControllerReplaceById(this.data._id, students).subscribe(
       (response) => {
         this.studentsInternalService.reloadStudents()
-        this.bsModalRef.hide();
+      this.bsModalRef.hide();
       }
     );
   }

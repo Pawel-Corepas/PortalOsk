@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Courses, Instructors, FilterRequest, CoursesControllerService, CoursesInstructorsControllerService } from 'rest_client_1.0';
 import { InstructorsService } from '../instructors.service';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import * as moment from 'moment';
 
 @Component({

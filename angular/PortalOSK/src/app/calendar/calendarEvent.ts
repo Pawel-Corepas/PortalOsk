@@ -5,6 +5,7 @@ dateFrom: Date;
 dateTo: Date;
 duration: number;
 description: string;
+place: string;
 createdBy: {
     creatorType: string
     creatorId: string

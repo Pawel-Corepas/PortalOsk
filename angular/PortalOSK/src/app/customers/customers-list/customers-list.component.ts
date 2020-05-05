@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomersService } from './customers.service';
 import { Customer } from '../customer';
 import * as moment from 'moment/moment';
@@ -6,22 +6,22 @@ import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
 import { FilterRequest, 
          Categories,
          Payments} from 'rest_client_1.0';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { CustomerAddComponent } from '../customer-add/customer-add.component';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PaymentAddComponent } from 'src/app/payments/payment-add/payment-add.component';
-import { CourseAssignComponent } from 'src/app/courses/course-assign/course-assign.component';
+
 import { InstructorAssignCourseComponent } from 'src/app/instructors/instructor-assign-course/instructor-assign-course.component';
-import { LessonAddComponent } from 'src/app/lessons/lesson-add/lesson-add.component';
+
 import { AmountService } from 'src/app/common/services/amount.service';;
 import { StudentsService } from '../students.service';
 import { CustomersAssignCourseComponent } from '../customers-assign-course/customers-assign-course.component';
-import { OrgCalendarComponent } from 'src/app/calendar/org-calendar/org-calendar.component';
+
 import { CalendarService } from 'src/app/calendar/org-calendar/calendar.service';
 import { Router } from '@angular/router';
-import { CalendarDayComponent } from 'src/app/calendar/calendar-day/calendar-day.component';
-import { AddCalendarEventComponent } from 'src/app/calendar/event/add-calendar-event/add-calendar-event.component';
+import { CustomerService } from '../customer.service';
+
 @Component({
   selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
@@ -47,6 +47,7 @@ export class CustomersListComponent implements OnInit {
 
   pages = [];
   constructor(private customersService: CustomersService,
+              private customerService:CustomerService,
               private amountService: AmountService,
               private modalService: BsModalService,
               private studentsInternalService: StudentsService,
@@ -135,6 +136,10 @@ export class CustomersListComponent implements OnInit {
       );
   }
   showStudentDetails(student) {
+
+   // this.router.navigate(['/customers/details']);
+    this.customerService.setStudent(student)
+    
     this.calModal = this.modalService.show(CustomerDetailsComponent, {
       initialState: {
         data: student
@@ -145,7 +150,7 @@ export class CustomersListComponent implements OnInit {
         () => {
          
         }
-      );
+      );/**/
 
   }
   registerPayment(student) {

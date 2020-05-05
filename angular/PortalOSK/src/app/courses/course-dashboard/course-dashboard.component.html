@@ -1,5 +1,5 @@
 <div class="card  border-0">
-    <div class="card-header  border-0 text-white bg-dark ">
+    <div *ngIf='!student' class="card-header  border-0 text-white bg-dark ">
       <nav aria-label="breadcrumb ">
         <ol class="breadcrumb  bg-transparent ">
           <li class="breadcrumb-item "><a class="text-warning font-size-2" href="#">Dashboard</a></li>
@@ -13,13 +13,13 @@
     </div>
     <div class="card-body">
       <div class="container  ">
-        <div class="desktop-table-container">
+        <div  *ngIf='!student' class="desktop-table-container">
           <app-stats-bar [stats]="stats" class="my-2 position-absolute poz-abs-addon"></app-stats-bar>
         </div>
         <div class="desktop-table-container">
-          <div class="card shadow mr-t-7">
+          <div class="card shadow" [ngClass]="{'mr-t-7': false}">
             <div class="card-body ">
-              <div class="align-right m-3">
+              <div  *ngIf='!student' class="align-right m-3">
                 <form class="form-inline my-2 my-lg-0 pr-4" [formGroup]="search">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" formControlName="searchString"
                     aria-label="Search">
@@ -77,7 +77,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="card-footer text-muted">
+            <div *ngIf='!student' class="card-footer text-muted">
                 <div class="row">
                   <div class="col-md-4 gb-dark">
                       <button type="button" class="btn btn-dark"
@@ -118,7 +118,7 @@
         <div class="mobile-table-container">
           <div class="card shadow ">
             <div class="card-body ">
-              <div class="align-right m-3">
+              <div  *ngIf='!student' class="align-right m-3">
                 <form class="form-inline my-2 my-lg-0 pr-4">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
   
@@ -138,7 +138,7 @@
                 </table>
               </div>
             </div>
-            <div class="card-footer text-muted">
+            <div *ngIf='!student' class="card-footer text-muted">
               <div class="row">
                 <div class="col-md-4 gb-dark">
                   <p class="page-link text-light bg-dark">Rozmiar Strony</p>

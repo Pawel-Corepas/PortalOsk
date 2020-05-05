@@ -4,7 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { ChartsModule } from 'ng2-charts';
-import { AlertModule, BsDropdownModule } from 'ngx-bootstrap';
+import {  BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +52,8 @@ import { InstructorsDashboardComponent } from './instructors/instructors-dashboa
 import { InstructorsService } from './instructors/instructors.service';
 import { InstructorDetailsComponent } from './instructors/instructor-details/instructor-details.component';
 import { InstructorAssignStudentsComponent } from './instructors/instructor-assign-students/instructor-assign-students.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AppDashboardComponent } from './dashboard/app-dashboard/app-dashboard.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -58,10 +61,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 const appRoutes: Routes = [
-
+  { path: '', component: AppDashboardComponent },
   { path: 'customers', component: CustomersListComponent },
   { path: 'courses', component: CourseDashboardComponent },
   { path: 'customer/dashboard', component: CustomerDashboardComponent },
+  { path: 'customers/details', component:CustomerDetailsComponent},
   { path: 'org/calendar', component: OrgCalendarComponent },
   { path: 'customer/booking', component: OrgCalendarComponent },
   { path: 'customer/day/booking', component: CalendarDayComponent },
@@ -101,15 +105,16 @@ export function init_app(appLoadService: CategoriesService) {
     CustomersAssignCourseComponent,
     InstructorsDashboardComponent,
     InstructorDetailsComponent,
-    InstructorAssignStudentsComponent
+    InstructorAssignStudentsComponent,
+    AppDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),
     PerfectScrollbarModule,
-    BrowserAnimationsModule,
     DeviceDetectorModule,
     AngularResizedEventModule,
     RouterModule.forRoot(appRoutes),
@@ -119,6 +124,7 @@ export function init_app(appLoadService: CategoriesService) {
     ApiModule,
     ReactiveFormsModule,
     FormsModule,
+    TabsModule.forRoot()
   ],
   providers: [
     {
@@ -138,7 +144,7 @@ export function init_app(appLoadService: CategoriesService) {
     CoursesService,
     InstructorsService
   ],
-  entryComponents: [OrgCalendarComponent, AddCalendarEventComponent, CustomerAddComponent, CustomerDetailsComponent,
+  entryComponents: [OrgCalendarComponent, AddCalendarEventComponent, CustomerAddComponent, CustomerDetailsComponent,CustomerDashboardComponent,
     PaymentAddComponent, InstructorAssignCourseComponent, InstructorAddComponent,InstructorDetailsComponent,InstructorAssignStudentsComponent,
     CourseAssignComponent, CourseAddComponent, InstructorAddComponent, LessonAddComponent, CustomersAssignCourseComponent, CourseDetailsComponent],
   bootstrap: [AppComponent]

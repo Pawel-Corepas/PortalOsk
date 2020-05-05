@@ -20,36 +20,53 @@
         class="free-hour shadow display-block px-5  py-3 m-4 bg-gradient-secondary text-white"> {{formatHour(event)}}
       </div>
     </div>
+    <div class="m-3">
     <div class="row shadow  p-2 bg-gradient-secondary text-white">
       <div class="col text-right">
         <h2 class="m-2"> {{formatDay()}}</h2>
       </div>
     </div>
+    
     <div class="row ">
       <h3 class="p-4">Umówione jazdy</h3>
     </div>
-    <div class="d-flex flex-wrap ">
-      <div class="d-flex flex-wrap ">
-        <div *ngFor="let event of usedEvents" class="free-hour shadow   m-4 ">
-          <div class=" shadow p-3 bg-gradient-secondary text-white">
-            <div class="row px-3">
-              <h4>{{formatEventDateTime(event)}}</h4>
+
+
+
+    <div class=" ">
+      <div class=" container">
+        <div *ngFor="let event of usedEvents"
+          class="free-hour shadow   m-4 bg-gradient-secondary text-white shadow  ">
+          <div class="row justify-content-center">
+
+            <h4 >{{formatEventDateTime(event)}}</h4>
+          </div>
+         
+
+            <div class="bg-secondary" *ngFor="let lesson of event.events">
+              <div class="row  ">
+              <div class="col-md-6">
+                <ul>
+                  <li>{{'Kursant: ' + lesson.studentId.name + ' ' + lesson.studentId.surname}}</li>
+                  <li>{{'Czas jazdy: ' +lesson.duration+' h.'}}</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li>{{'Uwagi: ' +lesson.description}}</li>
+                  <li>{{'Miejsce: ' +lesson.place}}</li>
+                </ul>
+              </div>
             </div>
-            <div *ngFor="let lesson of event.events" class="row px-3 display-inline">
-              <ul>
-                <li>{{'Kursant: ' + lesson.studentId.name + ' ' + lesson.studentId.surname}}</li>
-                <li>{{'Czas jazdy: ' +lesson.duration+' h.'}}</li>
-                <li>{{'Uwagi: ' +lesson.description}}</li>
-              </ul>
-
-            </div>
-
-
           </div>
         </div>
 
+
       </div>
+
     </div>
-
-
   </div>
+  </div>
+
+
+</div>

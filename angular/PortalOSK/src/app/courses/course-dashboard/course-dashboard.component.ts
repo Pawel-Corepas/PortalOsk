@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Component, OnInit, Input } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl } from '@angular/forms';
-import { FilterRequest, CoursesControllerService, Courses, Categories } from 'rest_client_1.0';
+import { FilterRequest, CoursesControllerService, Courses, Categories, Students } from 'rest_client_1.0';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { CourseAddComponent } from '../course-add/course-add.component';
@@ -19,6 +19,8 @@ import { CategoriesService } from 'src/app/common/services/categories.service';
 export class CourseDashboardComponent implements OnInit {
 
   courses: Courses[];
+  @Input() mode = "COURSE_DASHBOARD";
+  @Input() student: Students;
   categories: Categories[];
   modalRef: BsModalRef;
   search: FormGroup;
@@ -41,6 +43,7 @@ export class CourseDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.refreshCourses()
 
    
@@ -64,27 +67,32 @@ export class CourseDashboardComponent implements OnInit {
   }
 
   refreshCourses() {
-    this.coursesService.coursesControllerFind(this.filter).subscribe(
-      (response) => {
-        console.log(response.page);
-        this.total = response.page.total;
-        const pageCount = Math.round(response.page.total / this.filter.limit);
-        console.log(pageCount);
-        console.log(response.page.total % this.filter.limit);
-        if (response.page.total % this.filter.limit < 0 || response.page.total % this.filter.limit < this.filter.limit / 2) {
-          for (let index = 0; index < pageCount + 1; index++) {
-            this.pages.push(index + 1);
+    if (this.student){
+      this.courses = this.student.courses
+    } else {
+      this.coursesService.coursesControllerFind(this.filter).subscribe(
+        (response) => {
+          console.log(response.page);
+          this.total = response.page.total;
+          const pageCount = Math.round(response.page.total / this.filter.limit);
+          console.log(pageCount);
+          console.log(response.page.total % this.filter.limit);
+          if (response.page.total % this.filter.limit < 0 || response.page.total % this.filter.limit < this.filter.limit / 2) {
+            for (let index = 0; index < pageCount + 1; index++) {
+              this.pages.push(index + 1);
+            }
+          } else {
+            for (let index = 0; index < pageCount; index++) {
+              this.pages.push(index + 1);
+            }
           }
-        } else {
-          for (let index = 0; index < pageCount; index++) {
-            this.pages.push(index + 1);
-          }
+  
+          this.courses = response.data
+          this.categories = this.categoryService.getCategories();
         }
+      );
+    }
 
-        this.courses = response.data
-        this.categories = this.categoryService.getCategories();
-      }
-    );
   }
   Search() {
     this.filter.queryString = this.search.value.searchString;

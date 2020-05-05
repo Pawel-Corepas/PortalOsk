@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Students, Instructors, StudentsControllerService, InstructorsStudentsControllerService, FilterRequestPartial } from 'rest_client_1.0';
-import { BsModalRef } from 'ngx-bootstrap';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-instructor-assign-students',

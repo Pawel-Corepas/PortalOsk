@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InstructorAddComponent } from '../instructor-add/instructor-add.component';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Instructors, Categories, FilterRequest } from 'rest_client_1.0';
 import { StatItem } from 'src/app/common/stats-bar/stats-bar-item/stat-item';
