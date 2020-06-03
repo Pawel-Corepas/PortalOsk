@@ -1,13 +1,31 @@
 <div class="">
     <div class="card-header p-3 bg-gradient-secondary text-white">
-        <h2 class="text-center">Szczegóły Kursanta</h2>
+        <div class="row">
+            <div class="col-2 text-right">
+                <img src="./assets/img/user.jpg"
+                    class="img-fluid rounded-top,rounded-right,rounded-bottom,rounded-left, w-3rem" alt="avatar">
+            </div>
+            <div class="col my-auto">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mx-1">{{data.name + " " +data.surname }}</h5>
+                        <i class="fas fa-at 2 mx-1" aria-hidden="true"></i>{{data.email}}<br>
+                        <i class="fa fa-mobile-alt mx-1" aria-hidden="true"></i>{{data.mobileNumber}}
+                    </div>
+                </div>
+            </div>
+            <div class="col my-auto float-right">
+                <i class="fa fa-car font-size-3  mx-auto" aria-hidden="true"></i>
+                <h5>{{data.courses[0].name}}</h5>
+            </div>
+        </div>
     </div>
 </div>
 <div>
     <tabset>
         <tab heading="Profil" id="tab0">
             <div class="min-vh-100">
-                <app-product-card></app-product-card>
+                <app-product-card [student]="data"></app-product-card>
             </div>
         </tab>
         <tab heading="Dane Kursanta" id="tab1">
@@ -186,7 +204,11 @@
 
             </div>
         </tab>
-        <tab heading="Płatności"></tab>
-        <tab heading="Jazdy"></tab>
+        <tab heading="Płatności">
+            <app-payments-dashboard></app-payments-dashboard>
+        </tab>
+        <tab heading="Jazdy">
+            <app-product-events></app-product-events>
+        </tab>
     </tabset>
 </div>

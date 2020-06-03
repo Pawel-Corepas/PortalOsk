@@ -1,1 +1,37 @@
-<p>payments-dashboard works!</p>
+<!-- <button type="button" (click)="backProductCard()" class="btn btn-outline-primary m-2"> <i
+        class="fa fa-arrow-left font-size-3 text-dark" aria-hidden="true"></i></button> -->
+        <div class="m-5">
+  
+            <div class="card">
+                <!-- <div class="card-header card-header-text card-header-warning bg-gradient-secondary text-white">
+                    <div class="card-text">
+                        <h4 class="card-title">Umówione Zajęcia</h4>
+                    </div>
+                </div> -->
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-danger">
+                            <tr>
+                               
+                                <th>Przyjął</th>
+                                <th>Wpłacił</th>
+                                <th>Kursant</th>
+                                <th>Opis</th>
+                                <th>Kwota</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let payment of payments'>
+                                <td>{{payment.paidTo}}</td>
+                                <td>{{payment.paidBy}}</td>
+                                <td>{{payment.student.name +" "+ payment.student.surname}}</td>
+                                <td>{{payment.description}} </td>
+                                <td>{{payment.amount}}</td>
+                                <td>{{payment.date}}</td>
+                            </tr>
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>

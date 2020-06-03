@@ -2,8 +2,8 @@
 
     <div class="card-body  mx-auto mw-900 ">
         <div class="row my-3">
-            <h4 class="col card-title">Kurs Lipcowy 10.07.2019</h4>
-            <h5 class="col-3 card-title"> <span class="badge badge-danger">Kategoria B</span>
+            <h4 class="col card-title">{{"Kurs: " + student.courses[0].name}}</h4>
+            <h5 class="col-3 card-title"> <span class="badge badge-danger">{{"Kategoria " + student.courses[0].category.symbol}}</span>
 
             </h5>
 
@@ -18,10 +18,10 @@
             <div class="col my-auto">
                 <div class="media">
                     <div class="media-body">
-                        <h5 class="mx-1">Grzegorz Biś</h5>
-                        <small class="text-white pl-1">Instruktor Prowadzący</small> <br>
-                        <i class="fas fa-at 2 mx-1" aria-hidden="true"></i>grzegorz.bis@oskportal.pl <br>
-                        <i class="fa fa-mobile-alt mx-1" aria-hidden="true"></i> +48607657434
+                        <h5 class="mx-1">{{student.instructors[0].name + " " + student.instructors[0].surname}} </h5>
+                        <small class=" pl-1">Instruktor Prowadzący</small> <br>
+                        <i class="fas fa-at 2 mx-1" aria-hidden="true"></i>{{student.instructors[0].email}} <br>
+                        <i class="fa fa-mobile-alt mx-1" aria-hidden="true"></i> {{student.instructors[0].mobileNumber}}
                     </div>
                 </div>
             </div>

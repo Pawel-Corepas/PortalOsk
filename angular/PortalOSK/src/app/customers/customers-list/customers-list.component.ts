@@ -53,6 +53,7 @@ export class CustomersListComponent implements OnInit {
               private studentsInternalService: StudentsService,
               private calendarService: CalendarService,
               private router: Router) {
+                
                
   }
 
@@ -66,12 +67,14 @@ export class CustomersListComponent implements OnInit {
       }
     );
     this.studentsInternalService.reloadStudents()
-    this.studentsInternalService.students.subscribe(
+    /*this.studentsInternalService.students.subscribe(
       (students) => {
         this.students = students
         console.log(students)
       }
-    )
+    )*/
+
+  this.students = this.studentsInternalService.students
   }
 
   refreshPage() {
@@ -126,7 +129,8 @@ export class CustomersListComponent implements OnInit {
     this.calModal = this.modalService.show(CustomerAddComponent, {
       initialState: {
         data: event
-      }
+      },
+      class:"myDialog"
     });
     this.modalService.onHide
       .subscribe(
@@ -143,7 +147,8 @@ export class CustomersListComponent implements OnInit {
     this.calModal = this.modalService.show(CustomerDetailsComponent, {
       initialState: {
         data: student
-      }
+      },
+      class:"myDialog"
     });
     this.modalService.onHide
       .subscribe(
@@ -207,7 +212,9 @@ export class CustomersListComponent implements OnInit {
     this.calModal = this.modalService.show(CustomersAssignCourseComponent, {
       initialState: {
         data: student
-      }
+      },
+      
+      
     });
     this.modalService.onHide
       .subscribe(
