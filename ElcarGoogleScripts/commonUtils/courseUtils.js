@@ -16,8 +16,8 @@ function createCourse(e) {
 }
 
 function updateCourses(courseSheet) {
-        var courses = courseSheet.getRange(2,2,ss.getLastRow(),2).getValues();
-        updateStudentsCoursesDropdown(courses) 
+        var courses = courseSheet.getRange(2,2,courseSheet.getLastRow(),2).getValues();
+        updateStudentsFormCourses(courses) 
 }
 
 

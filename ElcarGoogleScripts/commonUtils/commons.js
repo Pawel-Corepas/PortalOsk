@@ -12,6 +12,7 @@ function getFormById(formId){
 function addRowToSheet(sheet, dane) {
 
     sheet.appendRow(dane);
+    
 }
 
 function prepareSheetRow(formPostedResponses, resource) {
@@ -54,4 +55,10 @@ function updateFormDropdown(form, id, listItems){
    
     item.asListItem().setChoiceValues(listItems);
     
+   }
+
+   function addNoteToLastRowCellY(columnIndex, noteText,sheet){
+    var lastRow = sheet.getLastRow();
+    var cell = sheet.getRange(lastRow, columnIndex)
+        cell.setNote(noteText)
    }
