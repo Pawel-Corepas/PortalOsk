@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+
+    <style>
+        h1 {
+            color: red;
+        }
+
+        p {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Masz Nowego Kursanta!</h2>
+    <p>
+        Cześć <?= instructor[3]?>
+    </p>
+    <p><strong>Poniżej dane nowego kursanta.</strong></p>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <td>
+                Imie i Nazwisko:
+            </td>
+
+            <td>
+                <?= student[3] + " " + student[4]  ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Telefon:
+            </td>
+
+            <td>
+                <?= student[6] ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Identyfikator Kursanta:
+            </td>
+
+            <td>
+                <?= student[1]?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Dodatkowe Informacje:
+            </td>
+
+            <td>
+                <?= additionalMessage?>
+            </td>
+        </tr>
+
+    </table>
+    <br>
+    <br>
+    <p>
+        <strong>Pozdrawiamy,</strong>
+    </p>
+    <p>
+        Biuro Elcar
+    </p>
+</body>
+
+</html>
